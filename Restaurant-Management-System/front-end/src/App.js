@@ -8,12 +8,8 @@ import UpdateStockScreen from "./screens/common/UpdateStockScreen";
 import AddMenuScreen from "./screens/common/AddMenuScreen";
 import MenuScreen from "./screens/common/MenuScreen";
 import AdminUpdateProfile from "./screens/common/AdminUpdateProfileScreen";
-// import AboutScreen from './screens/common/AboutScreen'
 import FeedBackScreen from "./screens/common/FeedBackScreen";
-import Navbar from "./components/Navbar2";
 import Footer from "./components/Footer";
-import Navbar2 from "./components/Navbar2";
-import AboutUs from "./components/AboutUs";
 
 import CustomerSigninScreen from "./screens/customer/CustomerSigninScreen";
 import CheckStockScreen from "./screens/common/CheckStockScreen";
@@ -38,15 +34,15 @@ import ContactUsScreen from "./screens/common/ContactUsScreen";
 
 import Home from "./screens/common/Home";
 import EditMenu from "./screens/common/EditMenu";
+import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
+import AboutScreen from "./screens/common/AboutScreen";
 
 function App() {
   return (
     <div>
       <Router>
-        {/* <Navbar /> */}
-        <Navbar2 />
-
-        <div className="">
+        <Navbar />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/home" exact component={Home} />
@@ -81,8 +77,7 @@ function App() {
             <Route exact path="/customermenu" component={CustomerMenuScreen} />
             <Route exact path="/addtable" component={OwnerAddTableScreen} />
             <Route exact path="/orders" component={CustomerGetOrdersScreen} />
-            {/* <Route exact path="/about" component={AboutScreen} /> */}
-            <Route exact path="/about" component={AboutUs} />
+            <Route exact path="/about" component={AboutScreen} />
             <Route
               exact
               path="/acceptpayment"
@@ -119,7 +114,7 @@ function App() {
             />
             <Route exact path="/contactus" component={ContactUsScreen} />
           </Switch>
-        </div>
+        <ScrollToTop />
         <Footer />
       </Router>
     </div>

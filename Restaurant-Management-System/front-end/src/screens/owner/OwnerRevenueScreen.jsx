@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import MonthlyRevenue from '../../components/charts/MonthlyRevenue'
-import DailyRevenue from './../../components/charts/DailyRevenue'
+import DailyRevenue from '../../components/charts/DailyRevenue'
 import {
   getTodaysRevenue,
   getThisWeeksRevenue,

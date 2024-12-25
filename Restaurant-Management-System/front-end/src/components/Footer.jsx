@@ -94,7 +94,7 @@ const Footer = (props) => {
             className="text-center p-4"
             style={{ backgroundColor: "black", color: "white" }}
           >
-            &copy; 2023 DelightfulPlates.com
+            &copy; { new Date().getFullYear() } DelightfulPlates.com. All rights reserved.
           </div>
         </div>
       </section>

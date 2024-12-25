@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { signin } from "../../actions/customerActions";
-import background from "../../image1.png";
 const CustomerSigninScreen = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +36,7 @@ const CustomerSigninScreen = (props) => {
   return (
     <div
       className="container-fluid vh-100 d-flex flex-column  align-items-center"
-      style={{ backgroundImage: `url(${background})`, backgroundSize: "cover" }}
+      style={{ backgroundImage: `url("image1.png")`, backgroundSize: "cover" }}
     >
       <Header title="Customer Signin" />
       <div className="form col-lg-4 col-md-6 col-sm-8">

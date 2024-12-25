@@ -111,7 +111,10 @@ const CustomerSignupScreen = (props) => {
   };
 
   return (
-    <div>
+    <div
+      className="container-fluid d-flex flex-column  align-items-center"
+      style={{ backgroundImage: `url("image1.png")`, backgroundSize: "cover" }}
+    >
       <Header title="Customer Signup" />
       <div className="container">
         <div className="row justify-content-center">

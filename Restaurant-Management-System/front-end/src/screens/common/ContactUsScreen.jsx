@@ -5,16 +5,13 @@ const ContactUsScreen = () => {
   return (
     <div>
       <div className="contact-us-container">
-        <div className="card-body">
-          <h5
+        <div className="container-fluid">
+        <h5
             className="card-text"
             style={{ color: "white", textAlign: "center" }}
           >
             Feel free to drop us a line below....!
           </h5>
-        </div>
-
-        <div className="container-fluid">
           <div className="row">
             <div className="col-md-4 offset-md-4">
               <div className="card ">

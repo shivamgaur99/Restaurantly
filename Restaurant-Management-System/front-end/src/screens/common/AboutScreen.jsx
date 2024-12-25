@@ -1,7 +1,7 @@
 import React from "react";
-import "./AboutUs.css";
+import "./AboutScreen.css";
 
-const AboutUs = () => {
+const AboutScreen = () => {
   return (
     <div>
       <div>
@@ -32,10 +32,28 @@ const AboutUs = () => {
               className="row display-flex justify-content:center"
               style={{ paddingTop: "4%" }}
             >
+                  <div
+                className="col-md-4 col-sm-12"
+                style={{ textAlign: "center" }}
+              >
+                <img
+                  className="rounded-circle"
+                  src="shivam.jpg"
+                  width={160}
+                  height={160}
+                  style={{ marginBottom: 25 }}
+                />
+                <h3>Shivam Gaur</h3>
+                <p>CDAC-Mumbai</p>
+                <p>
+                  <b>Email-</b>shivamgaur8527@gmail.com
+                </p>
+              </div>
               <div
                 className="col-md-4 col-sm-12"
                 style={{ textAlign: "center" }}
               >
+
                 <img
                   className="rounded-circle"
                   src="tejas.jpg"
@@ -66,23 +84,7 @@ const AboutUs = () => {
                   <b>Email-</b>suruchisonone6@gmail.com
                 </p>
               </div>
-              <div
-                className="col-md-4 col-sm-12"
-                style={{ textAlign: "center" }}
-              >
-                <img
-                  className="rounded-circle"
-                  src="shivam.jpg"
-                  width={160}
-                  height={160}
-                  style={{ marginBottom: 25 }}
-                />
-                <h3>Shivam Gaur</h3>
-                <p>CDAC-Mumbai</p>
-                <p>
-                  <b>Email-</b>shivamgaur8527@gmail.com
-                </p>
-              </div>
+          
             </div>
 
             <div
@@ -196,4 +198,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default AboutScreen;

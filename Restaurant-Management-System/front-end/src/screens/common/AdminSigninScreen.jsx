@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import background from "../../image1.png";
 import Header from "../../components/Header";
 import { signin } from "../../actions/adminActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,7 +44,7 @@ const AdminSigninScreen = (props) => {
   return (
     <div
     className="container-fluid vh-100 d-flex flex-column  align-items-center"
-    style={{ backgroundImage: `url(${background})`, backgroundSize: "cover" }}
+    style={{ backgroundImage: `url("image1.png")`, backgroundSize: "cover" }}
     >
       <Header title="Staff Signin" />
       <div className="container">

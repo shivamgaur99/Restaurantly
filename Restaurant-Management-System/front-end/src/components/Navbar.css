@@ -1,125 +1,123 @@
-/*.navbar {
-    background-color:black;
-    height: 80px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+/* Base styles */
+.navbar-container {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.navbar-container .MuiAppBar-root {
+  z-index: 100;
+  background: linear-gradient(135deg, #000000, #000000); /* Dark gradient */
+}
+
+/* Navbar Links */
+.MuiTypography-root {
+  font-weight: bold;
+  font-family: "Roboto", sans-serif; /* Sleek modern font */
+  font-size: 1.4rem; /* Increased font size for better readability */
+}
+
+.MuiButton-root {
+  font-size: 1rem;
+  margin-left: 20px;
+  text-transform: none;
+  transition: color 0.3s ease-in-out; /* Smooth hover transition */
+}
+
+.MuiButton-root:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ff9900; /* Change color on hover */
+}
+
+.MuiIconButton-root {
+  color: white;
+}
+
+/* Menu Dropdown */
+.navbar-dropdown a {
+  text-decoration: none;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  transition: background-color 0.2s ease, padding 0.2s ease; /* Smooth transitions */
+}
+
+.navbar-dropdown a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 12px 16px; /* Increase padding on hover */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Drawer Styles */
+.MuiDrawer-root {
+  background-color: #212121;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Add shadow for drawer */
+}
+
+.MuiDrawer-paper {
+  width: 250px;
+  background-color: #212121;
+  color: white;
+  border-radius: 4px; /* Rounded corners for drawer */
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar Items */
+.MuiListItem-root {
+  padding: 15px 20px;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+}
+
+.MuiListItem-root:hover {
+  background-color: #ff9900;
+  transform: scale(1.05); /* Slight scaling on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .MuiDrawer-paper {
+    width: 70%;
   }
-  
-  
-  .menu-bars {
-    margin-left: 3rem;
-    font-size: 2rem;
-    background: none;
-    padding-top: 6px;
-    color: white;
+
+  .navbar-dropdown a {
+    font-size: 14px;
+    padding: 15px;
   }
 
-  .menu-bars:hover{
-   color: white;
-    font-weight: 600;
-    font-size: large;
-    font-family: 'Times New Roman', Times, serif;
-  }
-  
-
- 
-  
-  .nav-menu {
-    background-color:black;
-    width: 250px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    transition: 850ms;
-  }
-  
-  .nav-menu.active {
-    left: 0;
-    transition: 350ms;
-  }
-  
-  .nav-text {      
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    /* padding: 8px 0px 8px 16px; */
-    /* list-style: none;
-    height: 60px; */
-    
-  /* }
-  
-  .nav-text a {
-    text-decoration: none;
-    color: #f5f5f5;
-    font-size: 18px;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    /* padding: 0 16px; */
-    /* border-radius: 4px;
-  }
-   */
-  /* .nav-text a:hover {
-    background-color: white;
-    color: black;
-  }
-  
-  .nav-menu-items {
-    width: 100%;
-  }
-  
-  .navbar-toggle {
-    background-color: black;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-
+  .MuiButton-root {
+    font-size: 15px;
+    margin-left: 12px;
   }
 
-  
-  span {
-    margin-left: 16px;
-  } */ 
+  .MuiTypography-root {
+    font-size: 1.6rem;
+  }
 
+  .MuiListItem-root {
+    font-size: 14px; /* Increase font size for readability on mobile */
+    padding: 18px;
+  }
+}
 
+/* Smooth Shadow on Navbar */
+.MuiAppBar-root {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
 
+/* Active Link Styles */
+.MuiButton-root.active,
+.MuiListItem-root.active {
+  color: #ff9900; /* Highlight active link */
+  font-weight: bold;
+  transition: transform 0.3s ease; /* Active link scaling effect */
+}
 
-
-  /* .nav-menu-items {
-    width: 100%;
-    padding: 50px 50px 50px 50px;
-    /* background-color: #000000; */
-  
-   .nav-text a {
-    text-decoration: none;
-   
-    font-size: 20px;
-    font-weight: 500;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-     padding: 16px; 
-     border-radius: 4px;
-     color: black;
-
-  } 
-
-    .nav-text a:hover {
-    background-color: black;
-    color:white;
-  }  
-   #collasible-nav-dropdown{
-    color: white;
-     font-family: "monoBrush Scriptspace";
-   font-size: 19px;
-   
-    
-  } 
+.MuiListItem-root.active:hover {
+  background-color: #f57c00; /* Darker hover color for active item */
+}
