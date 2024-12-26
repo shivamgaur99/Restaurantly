@@ -18,14 +18,14 @@ import {
   Divider,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { OwnerSidebarData } from "./sidebardata/OwnerSidebarData";
-import { ManagerSidebarData } from "./sidebardata/ManagerSidebarData";
-import { ChefSidebarData } from "./sidebardata/ChefSidebarData";
-import { WaiterSidebarData } from "./sidebardata/WaiterSidebarData";
-import { SupplierSidebarData } from "./sidebardata/SupplierSidebarData";
-import { CustomerSidebarData } from "./sidebardata/CustomerSidebarData";
-import { adminLogout } from "../actions/adminActions";
-import { customerLogout } from "../actions/customerActions";
+import { OwnerSidebarData } from "../sidebardata/OwnerSidebarData";
+import { ManagerSidebarData } from "../sidebardata/ManagerSidebarData";
+import { ChefSidebarData } from "../sidebardata/ChefSidebarData";
+import { WaiterSidebarData } from "../sidebardata/WaiterSidebarData";
+import { SupplierSidebarData } from "../sidebardata/SupplierSidebarData";
+import { CustomerSidebarData } from "../sidebardata/CustomerSidebarData";
+import { adminLogout } from "../../actions/adminActions";
+import { customerLogout } from "../../actions/customerActions";
 import "./Navbar.css";
 
 function Navbar() {

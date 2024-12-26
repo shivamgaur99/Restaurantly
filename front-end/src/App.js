@@ -9,7 +9,6 @@ import AddMenuScreen from "./screens/common/AddMenuScreen";
 import MenuScreen from "./screens/common/MenuScreen";
 import AdminUpdateProfile from "./screens/common/AdminUpdateProfileScreen";
 import FeedBackScreen from "./screens/common/FeedBackScreen";
-import Footer from "./components/Footer";
 
 import CustomerSigninScreen from "./screens/customer/CustomerSigninScreen";
 import CheckStockScreen from "./screens/common/CheckStockScreen";
@@ -34,9 +33,10 @@ import ContactUsScreen from "./screens/common/ContactUsScreen";
 
 import Home from "./screens/common/Home/Home";
 import EditMenu from "./screens/common/EditMenu";
-import Navbar from "./components/Navbar";
-import ScrollToTop from "./components/ScrollToTop";
 import AboutScreen from "./screens/common/AboutScreen";
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar/Navbar";
+import ScrollToTop from "./components/util/ScrollToTop";
 
 function App() {
   return (
