@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Restaurantly is a Restaurant Management System which is a comprehensive solution for managing various aspects of restaurant operations. Developed using Java with Spring Boot framework, this application facilitates tasks such as menu management, order processing, customer management, and employee management. 
+Restaurantly is a comprehensive restaurant management system built using Java and the Spring Boot framework. The system aims to streamline operations by managing menu items, orders, reservations, customers, and employees with ease. Whether it's for a small café or a large dining establishment, Restaurantly ensures smooth and efficient management in a real-time environment.
 
 ## Features
 
