@@ -96,15 +96,9 @@ function Navbar() {
               <MenuIcon />
             </IconButton>
           )}
-          <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "white", textTransform: "uppercase" }}>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              <Box
-                component="span"
-                sx={{ color: "#ff9900", fontWeight: "bold" }}
-              >
-                Delightful
-              </Box>
-              Plates
+              Restaurantly       
             </Typography>
           </Link>
           {/* Navbar Links for larger screens */}
@@ -140,6 +134,11 @@ function Navbar() {
               >
                 About Us
               </Button>
+               <a className="nav-link scrollto" href="/home#menu">Menu</a>
+            <a className="nav-link scrollto" href="/home#specials">Specials</a>
+           <a className="nav-link scrollto" href="/home#events">Events</a>
+           <a className="nav-link scrollto" href="/home#chefs">Chefs</a>
+            <a className="nav-link scrollto" href="/home#gallery">Gallery</a>
 
               {/* Dropdown for Login/Sign Up */}
               {!adminSignin.response && !customerSignin.response1 && !role ? (
@@ -237,6 +236,11 @@ function Navbar() {
                 }}
               />
             </ListItem>
+            <a className="nav-link scrollto" href="/home#menu">Menu</a>
+            <a className="nav-link scrollto" href="/home#specials">Specials</a>
+           <a className="nav-link scrollto" href="/home#events">Events</a>
+           <a className="nav-link scrollto" href="/home#chefs">Chefs</a>
+            <a className="nav-link scrollto" href="/home#gallery">Gallery</a>
             {!adminSignin.response && !customerSignin.response1 && !role ? (
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Button

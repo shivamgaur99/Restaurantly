@@ -8,7 +8,7 @@ const Header = (props) => {
       }}
     >
       <h1
-        style={{ color: "white", backgroundColor: "black"  }}
+        style={{ color: "white", backgroundColor: "black" }}
         className="title  mt-3"
       >
         {props.title}

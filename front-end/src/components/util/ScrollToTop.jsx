@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Fab, Box } from "@mui/material";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import "./ScrollToTop.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -40,28 +40,16 @@ function ScrollToTop() {
 
 
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        bottom: "30px",
-        right: "30px",
-        zIndex: 1000,
-        display: visible ? "flex" : "none",
-      }}
-    >
-      <Fab
-        color="primary"
-        size="small"
-        onClick={scrollToTop}
-        aria-label="Scroll to top"
-        sx={{
-          backgroundColor: "#ff9900",
-          "&:hover": { backgroundColor: "#cc7a00"},
+    <a
+        href="#"
+        className="back-to-top d-flex align-items-center justify-content-center"
+        onClick={(e) => {
+          e.preventDefault();  
+          scrollToTop();       
         }}
       >
-        <KeyboardArrowUpIcon />
-      </Fab>
-    </Box>
+        <i className="bi bi-arrow-up-short"></i>
+      </a>
   );
 }
 

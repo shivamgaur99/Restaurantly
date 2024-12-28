@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import "./Footer.css"; // Assuming you have a CSS file for styling
+import "./Footer.css"; 
+import "boxicons/css/boxicons.min.css";
 
 const Footer = () => {
   return (
@@ -63,7 +64,7 @@ const Footer = () => {
             <div className="col-lg-4 col-md-6 footer-newsletter">
               <h4>Our Newsletter</h4>
               <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-              <form action="" method="post">
+              <form action="#" method="#">
                 <input type="email" name="email" placeholder="Your Email" />
                 <input type="submit" value="Subscribe" />
               </form>
