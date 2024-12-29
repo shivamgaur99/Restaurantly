@@ -5,7 +5,7 @@ const TopBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 0) {
       setIsScrolled(true);
     } else {
       setIsScrolled(false);

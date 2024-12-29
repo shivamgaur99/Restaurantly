@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../../components/Header'
 import { getallordersWithId, paybill } from '../../actions/customerActions'
 import { useDispatch, useSelector } from 'react-redux'
 

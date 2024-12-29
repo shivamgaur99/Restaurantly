@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../../components/Header";
 import {
   getingredinet,
   addMenuItem,
@@ -64,7 +63,7 @@ const AddMenuScreen = (props) => {
 
   return (
     <div className="container mt-5">
-      <Header title="AddMenu" />
+      <h2>AddMenu</h2>
       <div className="form">
         <div className="mb-3">
           <label className="form-label">Menu Name</label>

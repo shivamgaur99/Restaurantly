@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "../../components/Header";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -62,7 +61,7 @@ const AdminUpdateProfile = (props) => {
 
   return (
     <div>
-      <Header title="Update Profile" />
+      <h2>Update Profile</h2>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">

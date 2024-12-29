@@ -1,0 +1,108 @@
+/* Overall container for signin */
+.admin-signin-container {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 100px;
+  }
+  
+  /* Signin form container */
+  .admin-signin {
+    width: 100%;
+    max-width: 800px;
+    background-color: #1c1b18;
+    padding: 40px;
+    border-radius: 10px;
+    color: white;
+  }
+  
+  /* Form header */
+  .admin-signin h2 {
+    font-size: 32px;
+    text-align: center;
+    color: #cda45e;
+    margin-bottom: 30px;
+  }
+  
+  /* Form container for fields */
+  .admin-signin-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Individual form group */
+  .admin-signin-form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Input fields styling */
+  .admin-signin-form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #625b4b;
+    background: #0c0b09;
+    color: white;
+    box-sizing: border-box;
+  }
+  
+  /* Focused input styling */
+  .admin-signin-form-group input:focus {
+    border-color: #cda45e;
+    outline: none;
+  }
+
+  .admin-signin-form-group label {
+    font-size: 16px;
+    color: #a49b89;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  /* Signin button styling */
+  .signin-btn {
+    width: 100%;
+    max-width: 160px;
+    padding: 12px;
+    background-color: #cda45e;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+  }
+  
+  .signin-btn:hover {
+    background-color: #d3af71;
+  }
+  
+  /* Loading spinner or text */
+  .loading {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .form-container {
+      gap: 10px;
+    }
+  
+    .signin-btn {
+      width: 100%;
+    }
+  
+    .admin-signin {
+      padding: 20px;
+    }
+  }
+  

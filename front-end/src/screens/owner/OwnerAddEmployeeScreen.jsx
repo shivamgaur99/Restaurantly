@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee } from "../../actions/owneraction/ownerAction";
 import { resetAddEmployee } from "../../actions/owneraction/ownerAction";
@@ -113,7 +112,7 @@ const OwnerAddEmployee = (props) => {
 
   return (
     <div className="container">
-      <Header title="Add Employee" />
+      <h2>Add Employee</h2>
       <div className="row justify-content-center">
         <div className="col-lg-6 col-md-8">
           <div className="form">

@@ -65,8 +65,8 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
 
-          <Route path="/admin/signin" exact component={AdminSignupScreen} />
-          <Route path="/admin/signup" exact component={AdminSigninScreen} />
+          <Route path="/admin/signup" exact component={AdminSignupScreen} />
+          <Route path="/admin/signin" exact component={AdminSigninScreen} />
           <Route path="/signin" exact component={CustomerSigninScreen} />
           <Route path="/signup" exact component={CustomerSignupScreen} />
           <Route

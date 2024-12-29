@@ -3,6 +3,7 @@ package com.app.pojos;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -16,19 +17,22 @@ import javax.persistence.Table;
 @IdClass(SupplierIngredientPk.class)
 public class SupplierIngredient implements Serializable {
 
+	@EmbeddedId
+	private SupplierIngredientPk id;
+
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "supplier_id",referencedColumnName = "id")
+	@JoinColumn(name = "supplier_id", referencedColumnName = "id")
 	private Administration supplier;
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ingredient_ID",referencedColumnName = "id")
+	@JoinColumn(name = "ingredient_ID", referencedColumnName = "id")
 	private Ingredient ingredient;
 
 	@Column(name = "price")
 	private double price;
-	
+
 	public SupplierIngredient() {
 		// TODO Auto-generated constructor stub
 	}
@@ -68,7 +72,5 @@ public class SupplierIngredient implements Serializable {
 	public String toString() {
 		return "SupplierIngredient [supplier=" + supplier + ", ingredient=" + ingredient + ", price=" + price + "]";
 	}
-	
-	
-	
+
 }

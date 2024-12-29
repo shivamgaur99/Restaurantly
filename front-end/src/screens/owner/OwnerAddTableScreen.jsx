@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTable, resetAddTable } from '../../actions/owneraction/ownerAction'
-import Header from '../../components/Header'
 
 const OwnerAddTableScreen = (props) => {
   const [tableNo, setTableNo] = useState('')
@@ -36,7 +35,7 @@ const OwnerAddTableScreen = (props) => {
 
   return (
     <div className="container">
-    <Header title="Add Table" />
+    <h2>Add Table</h2>
     <div className="row justify-content-center">
       <div className="col-lg-6 col-md-8">
         <div className="form">

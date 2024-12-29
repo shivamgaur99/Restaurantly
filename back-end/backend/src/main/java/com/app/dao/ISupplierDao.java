@@ -9,8 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.app.pojos.SupplierIngredient;
+import com.app.pojos.SupplierIngredientPk;
 
-public interface ISupplierDao extends JpaRepository<SupplierIngredient, Integer>{
+public interface ISupplierDao extends JpaRepository<SupplierIngredient, SupplierIngredientPk>{
 
 	
 	      @Query("select s from SupplierIngredient s join fetch s.ingredient where s.supplier.id=:id")

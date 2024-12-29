@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import "./Header.css";
 import { OwnerSidebarData } from "../sidebardata/OwnerSidebarData";
 import { ManagerSidebarData } from "../sidebardata/ManagerSidebarData";
 import { ChefSidebarData } from "../sidebardata/ChefSidebarData";
@@ -10,14 +9,19 @@ import { SupplierSidebarData } from "../sidebardata/SupplierSidebarData";
 import { CustomerSidebarData } from "../sidebardata/CustomerSidebarData";
 import { adminLogout } from "../../actions/adminActions";
 import { customerLogout } from "../../actions/customerActions";
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import "./Header.css";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [sidebar, setSidebar] = useState(false);
+  const [isTopbarHidden, setIsTopbarHidden] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const loggedin = sessionStorage["Loggedin"];
   const role = sessionStorage["role"];
-  
+
   const dispatch = useDispatch();
 
   const customerSignin = useSelector((store) => store.customerSignin);
@@ -25,11 +29,11 @@ const Header = () => {
   const adminSignin = useSelector((store) => store.adminSignin);
   const { response } = adminSignin;
 
-  let customer = response1 ? true : false;
-  let user;
-  let show = false;
+  let user = adminSignin?.response?.role || null;
+  let customer = customerSignin?.response1 || false;
 
-  if (adminSignin.loading === false && response) {
+  let show = false;
+  if (adminSignin.loading == false && response) {
     user = adminSignin.response.role;
     show = true;
     customer = false;
@@ -45,10 +49,27 @@ const Header = () => {
     } else {
       dispatch(adminLogout());
     }
-    sessionStorage.clear(); // Clear sessionStorage on logout
   };
 
-  const showSidebar = () => setSidebar(!sidebar);
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  // const handleScroll = () => {
+  //   setIsScrolled(window.scrollY > 100);
+  // };
+
+  const handleScroll = () => {
+    const currentScrollPosition = window.scrollY;
+    setIsScrolled(currentScrollPosition);
+
+    // Hide the topbar if the user scrolls down more than 100px
+    if (currentScrollPosition > 100) {
+      setIsTopbarHidden(true);
+    } else {
+      setIsTopbarHidden(false);
+    }
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -58,14 +79,6 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const handleScroll = () => {
-    if (window.scrollY > 100) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -73,61 +86,147 @@ const Header = () => {
     };
   }, []);
 
+  const getSidebarData = () => {
+    switch (role || user) {
+      case "OWNER":
+        return OwnerSidebarData;
+      case "MANAGER":
+        return ManagerSidebarData;
+      case "CHEF":
+        return ChefSidebarData;
+      case "WAITER":
+        return WaiterSidebarData;
+      case "SUPPLIER":
+        return SupplierSidebarData;
+      case "CUSTOMER":
+        return CustomerSidebarData;
+      default:
+        return [];
+    }
+  };
+
   return (
     <header
       id="header"
-      className={`fixed-top d-flex align-items-center ${isScrolled ? "header-scrolled" : ""}`}
+      className={`fixed-top d-flex align-items-center ${
+        isScrolled ? "header-scrolled" : ""
+      }`}
     >
+      {loggedin && (
+        <Sidebar
+          collapsed={!sidebarOpen}
+          className="custom-sidebar"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: 999,
+            // height: "100%",
+            // top: isTopbarHidden ? '-40px' : '0px',
+            marginTop: "120px",
+          }}
+        >
+          <Menu iconShape="square">
+            <MenuItem
+              onClick={toggleSidebar}
+              icon={sidebarOpen ? <FaTimes /> : <FaBars />}
+            >
+              <Link to={sidebarOpen ? <FaTimes /> : <FaBars />}>
+                Restaurantly
+              </Link>
+            </MenuItem>
+
+            {getSidebarData().map((item, index) => (
+              <MenuItem key={index} icon={item.icon}  >
+                <Link to={item.path}>{item.title}</Link>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Sidebar>
+      )}
       <div className="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-         {/* Sidebar Option - Based on user role */}
-         {show && (
-            <li>
-              <button onClick={showSidebar} className="nav-link scrollto">
-                <i className="fas fa-bars"></i>
-              </button>
-            </li>
-          )}
-            
         <h1 className="logo me-auto me-lg-0">
           <a href="/">Restaurantly</a>
         </h1>
 
-        <nav id="navbar" className={`navbar order-last order-lg-0 ${isMenuOpen ? "navbar-mobile" : ""}`}>
+        <nav
+          id="navbar"
+          className={`navbar order-last order-lg-0 ${
+            isMenuOpen ? "navbar-mobile" : ""
+          }`}
+        >
           <ul>
             <li>
-              <Link className="nav-link scrollto" to="/home" onClick={closeMenu}>
+              <Link
+                className="nav-link scrollto"
+                to="/home"
+                onClick={closeMenu}
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link className="nav-link scrollto" to="/about" onClick={closeMenu}>
+              <Link
+                className="nav-link scrollto"
+                to="/about"
+                onClick={closeMenu}
+              >
                 About
               </Link>
             </li>
             <li>
-              <a className="nav-link scrollto" href="/home#menu" onClick={closeMenu}>
+              <a
+                className="nav-link scrollto"
+                href="/home#menu"
+                onClick={closeMenu}
+              >
                 Menu
               </a>
             </li>
             <li>
-              <a className="nav-link scrollto" href="/home#specials" onClick={closeMenu}>
+              <a
+                className="nav-link scrollto"
+                href="/home#specials"
+                onClick={closeMenu}
+              >
                 Specials
               </a>
             </li>
             <li>
-              <a className="nav-link scrollto" href="/home#events" onClick={closeMenu}>
+              <a
+                className="nav-link scrollto"
+                href="/home#events"
+                onClick={closeMenu}
+              >
                 Events
               </a>
             </li>
             <li>
-              <a className="nav-link scrollto" href="/home#chefs" onClick={closeMenu}>
+              <a
+                className="nav-link scrollto"
+                href="/home#chefs"
+                onClick={closeMenu}
+              >
                 Chefs
               </a>
             </li>
             <li>
-              <a className="nav-link scrollto" href="/home#gallery" onClick={closeMenu}>
+              <a
+                className="nav-link scrollto"
+                href="/home#gallery"
+                onClick={closeMenu}
+              >
                 Gallery
               </a>
+            </li>
+            <li>
+              <Link
+                className="nav-link scrollto"
+                to="/contactus"
+                onClick={closeMenu}
+              >
+                Contact
+              </Link>
             </li>
 
             {/* Conditionally render Sign In/Sign Up dropdown or logout */}
@@ -160,26 +259,23 @@ const Header = () => {
                 </ul>
               </li>
             ) : (
-              <li>
-                <button className="nav-link scrollto" onClick={onLogout}>
-                  Logout
-                </button>
-              </li>
+              <a className="nav-link scrollto" onClick={onLogout}>
+                Logout
+              </a>
             )}
-            
-            <li>
-              <Link className="nav-link scrollto" to="/contactus" onClick={closeMenu}>
-                Contact
-              </Link>
-            </li>
           </ul>
           <i
-            className={`bi bi-list mobile-nav-toggle ${isMenuOpen ? "bi-x" : "bi-list"}`}
+            className={`bi bi-list mobile-nav-toggle ${
+              isMenuOpen ? "bi-x" : "bi-list"
+            }`}
             onClick={toggleMenu}
           ></i>
         </nav>
 
-        <a href="/home#book-a-table" className="book-a-table-btn scrollto d-none d-lg-flex">
+        <a
+          href="/home#book-a-table"
+          className="book-a-table-btn scrollto d-none d-lg-flex"
+        >
           Book a table
         </a>
       </div>

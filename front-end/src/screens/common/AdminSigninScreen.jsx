@@ -1,17 +1,28 @@
 import { useState, useEffect } from "react";
-import Header from "../../components/Header";
 import { signin } from "../../actions/adminActions";
 import { useDispatch, useSelector } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import "./AdminSigninScreen.css"; // Ensure the correct path to your CSS file
+
+// Yup Validation Schema
+const validationSchema = Yup.object({
+  username: Yup.string()
+    .email("Enter a valid email address")
+    .required("Username is required"),
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required")
+});
+
 const AdminSigninScreen = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const adminSignin = useSelector((store) => store.adminSignin);
   const { loading, error, response } = adminSignin;
 
-  const dispatch = useDispatch();
-  const onSignin = () => {
-    dispatch(signin(username, password));
+  const onSignin = (values) => {
+    dispatch(signin(values.username, values.password));
   };
 
   useEffect(() => {
@@ -23,18 +34,18 @@ const AdminSigninScreen = (props) => {
       sessionStorage.setItem("name", response.name);
       sessionStorage.setItem("Loggedin", true);
       sessionStorage.setItem("token", "Bearer " + response.token);
-      if (response.role == "OWNER") {
+      if (response.role === "OWNER") {
         props.history.push("/revenue");
-      } else if (response.role == "MANAGER") {
+      } else if (response.role === "MANAGER") {
         props.history.push("/managechef");
-      } else if (response.role == "CHEF") {
+      } else if (response.role === "CHEF") {
         props.history.push("/cheforders");
-      } else if (response.role == "WAITER") {
+      } else if (response.role === "WAITER") {
         props.history.push("/waiterorders");
-      } else if (response.role == "SUPPLIER") {
+      } else if (response.role === "SUPPLIER") {
         props.history.push("/ingredients");
       }
-    } else if (response && response.status == "error") {
+    } else if (response && response.status === "error") {
       alert(response.error);
     } else if (error) {
       alert(error);
@@ -42,56 +53,44 @@ const AdminSigninScreen = (props) => {
   }, [loading, error, response]);
 
   return (
-    <div
-    className="container-fluid vh-100 d-flex flex-column  align-items-center"
-    style={{ backgroundImage: `url("image1.png")`, backgroundSize: "cover" }}
-    >
-      <Header title="Staff Signin" />
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-6 col-md-8 col-sm-10">
-            <div className="form">
-              <div className="mb-3">
-                <label
-                  className="form-label"
-                  style={{ color: "black", fontWeight: "bold" }}
-                >
-                  Username
-                </label>
-                <input
-                  onChange={(e) => setUsername(e.target.value)}
-                  type="text"
-                  className="form-control"
-                  placeholder="test@test.com"
-                />
-              </div>
-              <div className="mb-3">
-                <label
-                  className="form-label"
-                  style={{ color: "black", fontWeight: "bold" }}
-                >
-                  Password
-                </label>
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="form-control"
-                  placeholder="Xyz@123"
-                  type="password"
-                />
-              </div>
-              <div className="mb-3">
-                <button onClick={onSignin} className="btn btn-success">
-                  Staff Signin
-                </button>
-              </div>
+    <div className="admin-signin-container">
+      <div className="admin-signin">
+        <h2>Staff Signin</h2>
+        <Formik
+          initialValues={{
+            username: "",
+            password: ""
+          }}
+          validationSchema={validationSchema}
+          onSubmit={onSignin}
+        >
+          <Form className="admin-signin-form-container">
+            <div className="admin-signin-form-group">
+              <label>Username</label>
+              <Field
+                name="username"
+                type="text"
+                placeholder="test@test.com"
+              />
+              <ErrorMessage name="username" component="div" className="error-message" />
             </div>
-            {loading && (
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            )}
-          </div>
-        </div>
+
+            <div className="admin-signin-form-group">
+              <label>Password</label>
+              <Field
+                name="password"
+                type="password"
+                placeholder="Xyz@123"
+              />
+              <ErrorMessage name="password" component="div" className="error-message" />
+            </div>
+
+            <div className="form-actions">
+              <button type="submit" className="signin-btn">Staff Signin</button>
+            </div>
+            {loading && <div className="loading">Loading...</div>}
+          </Form>
+        </Formik>
       </div>
     </div>
   );
