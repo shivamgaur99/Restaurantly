@@ -5,7 +5,6 @@ import Specials from "./components/Specials";
 import Events from "./components/Events";
 import BookATable from "./components/BookATable";
 import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
 import Chefs from "./components/Chefs";
 import Gallery from "./components/Gallery";
 
@@ -17,10 +16,9 @@ function Home() {
       <Specials />
       <Events />
       <BookATable />
-      <Testimonials />
       <Gallery />
-    <Chefs />
-    <Contact />
+        <Chefs /> 
+      <Testimonials />
     </div>
   );
 }
