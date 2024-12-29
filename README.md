@@ -34,7 +34,7 @@ The project follows a modular structure, with each module responsible for a spec
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yourusername/restaurant-management.git
+   git clone https://github.com/yourusername/Restaurantly.git
 
 
 ## Installation
