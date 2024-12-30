@@ -1,64 +1,82 @@
-import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { feedback } from '../../actions/customerActions'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { feedback } from '../../actions/customerActions';
 
 const AcceptFeedBackScreen = (props) => {
-  const [message, setMessage] = useState('')
-  const [rating, setRating] = useState('')
+  const dispatch = useDispatch();
+  const feedbackHere = useSelector((store) => store.customerFeedback);
+  const { loading, error, response } = feedbackHere;
 
-  const giveFeedback = () => {
-    dispatch(feedback(message, rating))
-    props.history.push('/customermenu')
-    //  dispatch(resetFeedback())
-  }
-  const feedbackHere = useSelector((store) => store.customerFeedback)
-  const { loading, error, response } = feedbackHere
-
-  const dispatch = useDispatch()
+  // Formik configuration
+  const formik = useFormik({
+    initialValues: {
+      message: '',
+      rating: '',
+    },
+    validationSchema: Yup.object({
+      message: Yup.string()
+        .min(5, 'Feedback must be at least 5 characters long')
+        .required('Feedback message is required'),
+      rating: Yup.number()
+        .min(0, 'Rating must be at least 0')
+        .max(5, 'Rating cannot exceed 5')
+        .required('Rating is required'),
+    }),
+    onSubmit: (values) => {
+      // Dispatch feedback action
+      dispatch(feedback(values.message, values.rating));
+      props.history.push('/customermenu');
+    },
+  });
 
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="form">
+          <form onSubmit={formik.handleSubmit} className="form">
             <div className="mb-3">
               <label style={{ marginTop: 30 }} className="form-label">
-                FeedBack
+                Feedback
               </label>
               <input
-                onChange={(e) => {
-                  setMessage(e.target.value);
-                }}
+                name="message"
                 className="form-control"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.message}
               />
+              {formik.touched.message && formik.errors.message ? (
+                <div className="text-danger">{formik.errors.message}</div>
+              ) : null}
             </div>
             <label htmlFor="customRange2" className="form-label">
-              Rating: {rating}
+              Rating: {formik.values.rating}
             </label>
             <input
-              onChange={(e) => {
-                setRating(e.target.value);
-              }}
+              name="rating"
               type="range"
               className="form-range"
               min="0"
               max="5"
               step="1"
               id="customRange2"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.rating}
             />
-          </div>
-          <button
-            onClick={() => {
-              giveFeedback();
-            }}
-            className="btn btn-info"
-          >
-            FeedBack
-          </button>
+            {formik.touched.rating && formik.errors.rating ? (
+              <div className="text-danger">{formik.errors.rating}</div>
+            ) : null}
+            <button type="submit" className="btn btn-info mt-3">
+              Submit Feedback
+            </button>
+          </form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AcceptFeedBackScreen
+export default AcceptFeedBackScreen;

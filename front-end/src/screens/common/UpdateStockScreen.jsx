@@ -52,8 +52,8 @@ const UpdateStockScreen = (props) => {
   }, [loading1, response1, error1])
 
   return (
-    <div className="container">
-      <table className="table table-striped">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
+      <table className="table table-striped text-white">
         <thead>
           <tr>
             <th>Name</th>
@@ -69,7 +69,7 @@ const UpdateStockScreen = (props) => {
             response.data.length > 0 &&
             response.data.map((supplier) => {
               return (
-                <tr key={supplier.id}>
+                <tr key={supplier.id} className="text-white">
                   <td>{supplier.name}</td>
                   <td>{supplier.ingredient}</td>
                   <td>{supplier.price}</td>

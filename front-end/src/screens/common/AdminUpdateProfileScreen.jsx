@@ -60,8 +60,8 @@ const AdminUpdateProfile = (props) => {
   }, [loading, response1, error]);
 
   return (
-    <div>
-      <h2>Update Profile</h2>
+    <div className="container p-5 text-white" style={{ marginTop: "100px" }}>
+      <h2 className="text-center">Update Profile</h2>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import "./Preloader.css";
 
 const Preloader = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000); // Example for a 1-second delay for preloader
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 

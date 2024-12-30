@@ -49,8 +49,8 @@ const SupplierScreen = (props) => {
   }
 
   return (
-    <div className="container mt-4">
-      <table className="table table-striped">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
+      <table className="table table-striped text-white">
         <thead>
           <tr>
             <th>Ingredient_id</th>
@@ -63,7 +63,7 @@ const SupplierScreen = (props) => {
             response.data &&
             response.data.length > 0 &&
             response.data.map((ing) => (
-              <tr key={ing.ingredient_id}>
+              <tr key={ing.ingredient_id} className='text-white'>
                 <td>{ing.ingredient_id}</td>
                 <td>{ing.ingredient}</td>
                 <td>

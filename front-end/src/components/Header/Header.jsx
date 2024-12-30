@@ -63,7 +63,6 @@ const Header = () => {
     const currentScrollPosition = window.scrollY;
     setIsScrolled(currentScrollPosition);
 
-    // Hide the topbar if the user scrolls down more than 100px
     if (currentScrollPosition > 100) {
       setIsTopbarHidden(true);
     } else {
@@ -78,6 +77,13 @@ const Header = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const toggleDropdown = (e) => {
+    const dropdown = e.currentTarget.nextElementSibling;
+    if (dropdown) {
+      dropdown.classList.toggle("dropdown-active");
+    }
+  };  
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -137,7 +143,7 @@ const Header = () => {
             </MenuItem>
 
             {getSidebarData().map((item, index) => (
-              <MenuItem key={index} icon={item.icon}  >
+              <MenuItem key={index} icon={item.icon} onClick={toggleSidebar}>
                 <Link to={item.path}>{item.title}</Link>
               </MenuItem>
             ))}
@@ -232,20 +238,28 @@ const Header = () => {
             {/* Conditionally render Sign In/Sign Up dropdown or logout */}
             {!show ? (
               <li className="dropdown">
-                <a href="#">
+                <a href="#"
+                 onClick={(e) => {
+                  e.preventDefault();
+                  toggleDropdown(e);
+                }}
+                >
                   <span>Sign In / Sign Up</span>
                   <i className="bi bi-chevron-down"></i>
                 </a>
                 <ul>
                   <li>
-                    <a href="/signin">Customer Sign In</a>
+                    <a href="/signin">Sign In</a>
                   </li>
                   <li>
-                    <a href="/signup">Customer Sign Up</a>
+                    <a href="/signup">Sign Up</a>
                   </li>
-                  <li className="dropdown">
+                  <li>
+                    <a href="/admin/signin">Admin?</a>
+                  </li>
+                  {/* <li className="dropdown">
                     <a href="#">
-                      <span>Admin</span> <i className="bi bi-chevron-right"></i>
+                      <span>Admin?</span> <i className="bi bi-chevron-right"></i>
                     </a>
                     <ul>
                       <li>
@@ -255,13 +269,15 @@ const Header = () => {
                         <a href="/admin/signup">Admin Sign Up</a>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
             ) : (
-              <a className="nav-link scrollto" onClick={onLogout}>
+              <li onClick={onLogout}>
+              <a className="nav-link scrollto" href="#">
                 Logout
               </a>
+              </li>
             )}
           </ul>
           <i

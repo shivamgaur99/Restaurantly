@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as AiIcons from 'react-icons/ai'
 import { cusAddtoCart } from '../../actions/customerActions'
 import { store } from 'react-notifications-component'
-
 import 'animate.css'
+
 const CustomerMenuScreen = () => {
   const menu = useSelector((store) => store.getallmenu)
   const [search, setSearch] = useState('')
@@ -33,7 +33,7 @@ const CustomerMenuScreen = () => {
 
   useEffect(() => {}, [error, response, loading])
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
       <div className="row">
         <div className="col-md-12">
           {/* <input
@@ -107,7 +107,7 @@ const CustomerMenuScreen = () => {
           </button>
         </div>
       </div>
-          <table className="table table-striped">
+          <table className="table table-striped text-white">
             <thead>
               <tr>
                 <th>Name</th>
@@ -133,7 +133,7 @@ const CustomerMenuScreen = () => {
                   })
                   .map((menu, index) => {
                     return (
-                      <tr key={index}>
+                      <tr key={index} className="text-white">
                         <td>{menu.menuName}</td>
                         <td>{menu.price}</td>
                         <td>{menu.category}</td>

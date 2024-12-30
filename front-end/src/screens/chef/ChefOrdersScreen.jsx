@@ -22,20 +22,20 @@ const ChefOrdersScreen = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: '100px', minHeight: '60vh' }}>
       <div className="row justify-content-center">
-        <div className="col-lg-8">
+        <div className='text-center'>
           {(error || (response && response.data.length < 1)) && (
             <h1>No Orders to Prepare</h1>
           )}
           {response &&
             response.data.map((sub, index) => {
               return (
-                <div key={index} className="mb-4">
+                <div key={index} className="mb-4 text-white">
                   <div role="alert" aria-live="assertive" aria-atomic="true">
                     <div className="toast-body">
                       <div className="table-responsive">
-                        <table className="table table-striped">
+                        <table className="table table-striped text-white">
                           <thead>
                             <tr>
                               <th>Menu</th>
@@ -45,7 +45,7 @@ const ChefOrdersScreen = () => {
                           <tbody>
                             {sub.map((child, i) => {
                               return (
-                                <tr key={i}>
+                                <tr key={i} className="text-white">
                                   <td>{child.orderName}</td>
                                   <td>{child.quantity}</td>
                                 </tr>

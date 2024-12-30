@@ -269,7 +269,7 @@ export const signin = (username, password) => {
             type: CUSTOMER_SIGNIN_SUCCESS,
             payload: response.data,
           },
-          console.log(response.data)
+         
         );
       })
       .catch((error) => {

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee } from "../../actions/owneraction/ownerAction";
 import { resetAddEmployee } from "../../actions/owneraction/ownerAction";
+import "./OwnerAddEmployee.css";
 
 const OwnerAddEmployee = (props) => {
   const [name, setName] = useState("");
@@ -9,41 +10,30 @@ const OwnerAddEmployee = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [nameError, setNameError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const user = sessionStorage["role"];
-
   const dispatch = useDispatch();
 
-  const role1 = sessionStorage["role"];
   const ownerAddEmployee = useSelector((store) => store.ownerAddEmployee);
   const { loading, response, error } = ownerAddEmployee;
 
   useEffect(() => {
-    console.log("use effect called: ");
-    console.log("loading: ", loading);
-    console.log("response: ", response);
-    console.log("error: ", error);
-
-    if (response && response.status == 200) {
-      // user successfully got registered
+    if (response && response.status === 200) {
       dispatch(resetAddEmployee());
-      if (user == "MANAGER") {
+      if (user === "MANAGER") {
         props.history.push("/managechef");
-      } else if (user == "OWNER") {
+      } else if (user === "OWNER") {
         props.history.push("/revenue");
       }
     } else if (error) {
-      // there is an error while making the API call
-      console.log(error);
-      alert("error while making API call");
+      alert("Error while making API call");
     }
   }, [loading, response, error]);
 
@@ -61,7 +51,7 @@ const OwnerAddEmployee = (props) => {
       setUsernameError("Username is required");
       isValid = false;
     } else if (!/^\S+@\S+\.\S+$/.test(username)) {
-      setUsernameError("Enter a valid username ");
+      setUsernameError("Enter a valid username");
       isValid = false;
     } else {
       setUsernameError("");
@@ -102,110 +92,98 @@ const OwnerAddEmployee = (props) => {
 
   const onSignup = () => {
     if (validateForm()) {
-      if (password === confirmPassword) {
-        dispatch(addEmployee(name, username, email, password, role));
-      } else {
-        setConfirmPasswordError("Passwords do not match");
-      }
+      dispatch(addEmployee(name, username, email, password, role));
     }
   };
 
   return (
-    <div className="container">
-      <h2>Add Employee</h2>
-      <div className="row justify-content-center">
-        <div className="col-lg-6 col-md-8">
-          <div className="form">
-            <div className="mb-3">
-              <label className="form-label">Name</label>
-              <input
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                className="form-control"
-              />
-              {nameError && <div style={{ color: "red" }}>{nameError}</div>}
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Username</label>
-              <input
-                onChange={(e) => {
-                  setUserName(e.target.value);
-                }}
-                className="form-control"
-                placeholder="test@gmail.com"
-              />
-              {usernameError && (
-                <div style={{ color: "red" }}>{usernameError}</div>
-              )}
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Email</label>
-              <input
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                type="email"
-                className="form-control"
-                placeholder="test@gmail.com"
-              />
-              {emailError && <div style={{ color: "red" }}>{emailError}</div>}
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                type="password"
-                className="form-control"
-                placeholder="User@123"
-              />
-              {passwordError && (
-                <div style={{ color: "red" }}>{passwordError}</div>
-              )}
-            </div>
+    <div className="owner-add-employee-container">
+      <div className="owner-add-employee">
+        <h2>Add Employee</h2>
+        <div className="owner-add-employee-form">
+          <div className="owner-add-employee-form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              onChange={(e) => setName(e.target.value)}
+              className="input-field"
+              type="text"
+              placeholder="Enter employee name"
+            />
+            {nameError && <div className="error-message">{nameError}</div>}
+          </div>
 
-            <div className="mb-3">
-              <label className="form-label">Confirm Password</label>
-              <input
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                }}
-                type="password"
-                className="form-control"
-                placeholder="Confirm Password"
-              />
-              {confirmPasswordError && (
-                <div style={{ color: "red" }}>{confirmPasswordError}</div>
-              )}
-            </div>
+          <div className="owner-add-employee-form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              onChange={(e) => setUserName(e.target.value)}
+              className="input-field"
+              type="text"
+              placeholder="Enter username"
+            />
+            {usernameError && (
+              <div className="error-message">{usernameError}</div>
+            )}
+          </div>
 
-            <div className="mb-3">
-              <label className="form-label">Role</label>
-              <select
-                onChange={(e) => {
-                  setRole(e.target.value);
-                }}
-                className="form-select"
-              >
-                <option selected>Choose A Role</option>
-                {user != "MANAGER" && role1 != "MANAGER" && (
-                  <option value="MANAGER">Manager</option>
-                )}
-                {/* { && <option value="MANAGER">Manager</option>} */}
-                <option value="CHEF">Chef</option>
-                <option value="WAITER">Waiter</option>
-                {user != "MANAGER" && (
-                  <option value="SUPPLIER">Supplier</option>
-                )}
-              </select>
-            </div>
-            <div className="mb-3">
-              <button onClick={onSignup} className="btn btn-success">
-                Add Employee
-              </button>
-            </div>
+          <div className="owner-add-employee-form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              className="input-field"
+              type="email"
+              placeholder="test@example.com"
+            />
+            {emailError && <div className="error-message">{emailError}</div>}
+          </div>
+
+          <div className="owner-add-employee-form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              className="input-field"
+              type="password"
+              placeholder="Enter password"
+            />
+            {passwordError && (
+              <div className="error-message">{passwordError}</div>
+            )}
+          </div>
+
+          <div className="owner-add-employee-form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="input-field"
+              type="password"
+              placeholder="Confirm password"
+            />
+            {confirmPasswordError && (
+              <div className="error-message">{confirmPasswordError}</div>
+            )}
+          </div>
+
+          <div className="owner-add-employee-form-group">
+            <label htmlFor="role">Role</label>
+            <select
+              onChange={(e) => setRole(e.target.value)}
+              className="input-field"
+            >
+              <option value="">Choose a Role</option>
+              {user !== "MANAGER" && (
+                <option value="MANAGER">Manager</option>
+              )}
+              <option value="CHEF">Chef</option>
+              <option value="WAITER">Waiter</option>
+              {user !== "MANAGER" && (
+                <option value="SUPPLIER">Supplier</option>
+              )}
+            </select>
+          </div>
+
+          <div className="form-actions">
+            <button onClick={onSignup} className="signup-btn">
+              Add Employee
+            </button>
           </div>
         </div>
       </div>
@@ -214,5 +192,3 @@ const OwnerAddEmployee = (props) => {
 };
 
 export default OwnerAddEmployee;
-
-

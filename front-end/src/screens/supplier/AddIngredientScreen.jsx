@@ -38,8 +38,8 @@ const AddIngredientScreen = (props) => {
   }, [response1, error1])
 
   return (
-    <div className="container mt-4">
-      <table className="table table-striped">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
+      <table className="table table-striped text-white">
         <thead>
           <tr>
             <th>Id</th>
@@ -53,7 +53,7 @@ const AddIngredientScreen = (props) => {
             response.data &&
             response.data.length > 0 &&
             response.data.map((ing) => (
-              <tr key={ing.id}>
+              <tr key={ing.id} className='text-white'>
                 <td>{ing.id}</td>
                 <td>{ing.name}</td>
                 <td>

@@ -1,4 +1,4 @@
-.admin-signup-container {
+.owner-add-employee-container {
   background-color: #000;
   display: flex;
   justify-content: center;
@@ -7,7 +7,10 @@
   margin-top: 100px;
 }
 
-.admin-signup {
+.owner-add-employee {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   max-width: 800px;
   background-color: #1c1b18;
@@ -16,40 +19,34 @@
   color: white;
 }
 
-.admin-signup h2 {
+.owner-add-employee h2 {
   font-size: 32px;
   text-align: center;
   color: #cda45e;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-.admin-signup-form-container {
+.owner-add-employee-form {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 20px;
-  justify-content: space-between;
 }
 
-.admin-signup-form-group {
-  flex: 1 1 calc(50% - 20px);
+.owner-add-employee-form-group {
   display: flex;
   flex-direction: column;
 }
 
-.admin-signup-form-group.role,
-.form-actions {
-  flex: 1 1 100%;
-}
-
-.admin-signup-form-group label {
+.owner-add-employee-form-group label {
   font-size: 16px;
   color: #a49b89;
   font-weight: 500;
   margin-bottom: 5px;
+  margin-top: 5px;
 }
 
-.admin-signup-form-group input,
-.admin-signup-form-group select {
+.owner-add-employee-form-group input,
+.owner-add-employee-form-group select {
   width: 100%;
   padding: 12px;
   font-size: 14px;
@@ -60,13 +57,13 @@
   box-sizing: border-box;
 }
 
-.admin-signup-form-group input::placeholder,
-.admin-signup-form-group select option:first-child {
+.owner-add-employee-form-group input::placeholder,
+.owner-add-employee-form-group select option:first-child {
   color: #a49b89;
 }
 
-.admin-signup-form-group input:focus,
-.admin-signup-form-group select:focus {
+.owner-add-employee-form-group input:focus,
+.owner-add-employee-form-group select:focus {
   border-color: #cda45e;
   outline: none;
 }
@@ -98,40 +95,31 @@
   margin-top: 20px;
 }
 
-.signup-link {
+.error-message {
+  color: red;
   font-size: 14px;
-}
-
-.signup-link a {
-  color: #cda45e;
-  text-decoration: none;
+  margin-top: 5px;
   font-weight: bold;
 }
 
-.signup-link a:hover {
-  color: #d3af71;
-}
-
 @media (max-width: 768px) {
-  .admin-signup-container {
-    margin-top: 100px;
+  .owner-add-employee-container {
+    margin-top: 50px; /* Reduced margin for mobile */
   }
-  .admin-signup-form-group {
+
+  .owner-add-employee {
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .owner-add-employee-form {
+    gap: 15px; /* Reduced gap for smaller screens */
+  }
+
+  .owner-add-employee-form-group {
     flex: 1 1 100%;
   }
 
   .signup-btn {
     width: 100%;
   }
-
-  .admin-signup {
-    padding: 20px;
-  }
-}
-
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-  font-weight: bold;
 }

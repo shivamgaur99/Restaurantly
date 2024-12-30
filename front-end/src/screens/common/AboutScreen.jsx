@@ -1,181 +1,63 @@
 import React from "react";
 import "./AboutScreen.css";
+import ProfileCard from "../../components/Cards/ProfileCard";
 
 const AboutScreen = () => {
+  const teamMembers = [
+    {
+      name: "Shivam Gaur",
+      role: "CDAC-Mumbai",
+      email: "shivamgaur8527@gmail.com",
+      image: "shivam.jpg",
+    },
+    {
+      name: "Tejas Badgujar",
+      role: "CDAC-Mumbai",
+      email: "tejasbadgujar70@gmail.com",
+      image: "tejas.jpg",
+    },
+    {
+      name: "Suruchi Sonone",
+      role: "CDAC-Mumbai",
+      email: "suruchisonone6@gmail.com",
+      image: "suruchi.jpg",
+    },
+    {
+      name: "Ghanshyam Mali",
+      role: "CDAC-Mumbai",
+      email: "ghanshyams.mali@gmail.com",
+      image: "ghanshyam.jpg",
+    },
+    {
+      name: "Saurabh Ladi",
+      role: "CDAC-Mumbai",
+      email: "saurabhladii@gmail.com",
+      image: "saurabh.jpg",
+    },
+    {
+      name: "Latika Mitkari",
+      role: "CDAC-Mumbai",
+      email: "latikamitkar@gmail.com",
+      image: "latika.jpg",
+    },
+  ];
   return (
     <div>
-      <section className="about" id="about">
-        <div className="container">
-          <div className="row" style={{ marginTop: "50px" }}>
-            <div className="col-md-6 py-3 py-md-0">
-              <div className="card">
-                <img
-                  src="https://media.iceportal.com/43634/photos/65355143_XXL.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-
-            <div className="col-md-6 py-3 py-md-0" data-aos="fade-up">
-              <p className="text-align: center">
-                Restauranty is a restaurant reservation system designed to
-                create a seamless and enjoyable booking experience for
-                customers. Through an intuitive online portal and app, customers
-                can easily explore available reservation slots, choose their
-                preferred date and time, and specify the size of their party.
-                The system offers real-time availability updates, enabling
-                customers to make informed decisions. It also allows customers
-                to customize their dining experience by selecting their
-                preferred seating area or table. Once a reservation is made,
-                customers receive immediate confirmations and timely reminders,
-                reducing no-shows. The system's integration with the
-                restaurant's POS system streamlines operations, and customers
-                can modify or cancel reservations as needed. Overall,
-                Restauranty focuses on enhancing customer satisfaction and
-                efficiency in the dining reservation process.{" "}
-              </p>
-              <div className="btns">
-                <a
-                  href="https://en.wikipedia.org/wiki/Indian_cuisine"
-                  className="btn-book animated fadeInUp scrollto" target="_blank" rel="noreferrer"
-                >
-                  Read More...
-                </a>
-              </div>
-            </div>
+      <section style={{ backgroundColor: " #0c0b09", marginTop: "5%" }}>
+      <div className="container" data-aos="fade-up">
+          <div className="section-title text-center">
+            <p>Founder and Co-Founders</p>
           </div>
-        </div>
-      </section>
-      <div>
-        <div style={{ backgroundColor: " #0c0b09" }}>
-          <div style={{ paddingTop: "2%" }} className="container">
-            <h2
-              style={{
-                textAlign: "center",
-                fontSize: 30,
-                fontFamily: "initial",
-                fontWeight: "bold",
-              }}
-            >
-              OUR TEAM
-            </h2>
             <div
               className="row display-flex justify-content:center"
-              style={{ paddingTop: "4%" }}
             >
-              <div
-                className="col-md-4 col-sm-12"
-                style={{ textAlign: "center" }}
-              >
-                <img
-                  className="rounded-circle"
-                  src="shivam.jpg"
-                  width={160}
-                  height={160}
-                  style={{ marginBottom: 25 }}
-                />
-                <h3>Shivam Gaur</h3>
-                <p>CDAC-Mumbai</p>
-                <p>
-                  <b>Email-</b>shivamgaur8527@gmail.com
-                </p>
-              </div>
-              <div
-                className="col-md-4 col-sm-12"
-                style={{ textAlign: "center" }}
-              >
-                <img
-                  className="rounded-circle"
-                  src="tejas.jpg"
-                  width={160}
-                  height={160}
-                  style={{ marginBottom: 25 }}
-                />
-                <h3>Tejas Badgujar</h3>
-                <p>CDAC-Mumbai</p>
-                <p>
-                  <b>Email-</b>tejasbadgujar70@gmail.com
-                </p>
-              </div>
-              <div
-                className="col-md-4 col-sm-12"
-                style={{ textAlign: "center" }}
-              >
-                <img
-                  className="rounded-circle"
-                  src="suruchi.jpg"
-                  width={160}
-                  height={160}
-                  style={{ marginBottom: 25 }}
-                />
-                <h3>Suruchi Sonone</h3>
-                <p>CDAC-Mumbai</p>
-                <p>
-                  <b>Email-</b>suruchisonone6@gmail.com
-                </p>
-              </div>
-            </div>
-
-            <div
-              className="row display-flex justify-content:center"
-              style={{ paddingTop: "4%" }}
-            >
-              <div
-                className="col-md-4 col-sm-12"
-                style={{ textAlign: "center" }}
-              >
-                <img
-                  className="rounded-circle"
-                  src="ghanshyam.jpg"
-                  width={160}
-                  height={160}
-                  style={{ marginBottom: 25 }}
-                />
-                <h3>Ghanshyam Mali</h3>
-                <p>CDAC-Mumbai</p>
-                <p>
-                  <b>Email-</b>ghanshyams.mali@gmail.com
-                </p>
-              </div>
-              <div
-                className="col-md-4 col-sm-12"
-                style={{ textAlign: "center" }}
-              >
-                <img
-                  className="rounded-circle"
-                  src="saurabh.jpg"
-                  width={160}
-                  height={160}
-                  style={{ marginBottom: 25 }}
-                />
-                <h3>Saurabh Ladi</h3>
-                <p>CDAC-Mumbai</p>
-                <p>
-                  <b>Email-</b>saurabhladii@gmail.com
-                </p>
-              </div>
-              <div
-                className="col-md-4 col-sm-12"
-                style={{ textAlign: "center" }}
-              >
-                <img
-                  className="rounded-circle"
-                  src="latika.jpg"
-                  width={160}
-                  height={160}
-                  style={{ marginBottom: 25 }}
-                />
-                <h3>Latika Mitkari</h3>
-                <p>CDAC-Mumbai</p>
-                <p>
-                  <b>Email-</b>latikamitkar@gmail.com
-                </p>
-              </div>
+            <ProfileCard/>
             </div>
           </div>
-        </div>
-      </div>
-      <section id="about" className="about">
+          </section>
+
+          
+      <section id="about" className="about mt-5">
         <div className="container" data-aos="fade-up">
           <div className="row">
             <div
@@ -187,7 +69,7 @@ const AboutScreen = () => {
                 <img src="assets/img/about.jpg" alt="About Us" />
               </div>
             </div>
-            <div className="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+            <div className="col-lg-6 pt-4 mt-4 pt-lg-0 order-2 order-lg-1 content">
               <h3>Committed to Excellence in Dining.</h3>
               <p className="fst-italic">
                 Restaurantly focuses on delivering quality dining experiences
@@ -222,16 +104,109 @@ const AboutScreen = () => {
           </div>
         </div>
       </section>
-      <section id="why-us" class="why-us">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
+
+      
+      
+        {/* <div style={{ backgroundColor: " #0c0b09" }}>
+          <div style={{ paddingTop: "2%" }} className="container">
+            <h2
+              style={{
+                textAlign: "center",
+                fontSize: 30,
+                fontFamily: "initial",
+                fontWeight: "bold",
+              }}
+            >
+              OUR TEAM
+            </h2>
+            <div
+              className="row display-flex justify-content:center"
+              style={{ paddingTop: "4%" }}
+            >
+              {teamMembers.map((member, index) => (
+                <div
+                  key={index}
+                  className="col-md-4 col-sm-12"
+                  style={{ textAlign: "center", marginBottom: 25 }}
+                >
+                  <img
+                    className="rounded-circle"
+                    src={member.image}
+                    width={160}
+                    height={160}
+                    style={{ marginBottom: 25 }}
+                    alt={member.name}
+                  />
+                  <h3>{member.name}</h3>
+                  <p>{member.role}</p>
+                  <p>
+                    <b>Email-</b> {member.email}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div> */}
+
+    
+      {/* <section className="about" id="about">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 py-3 py-md-0">
+              <div className="about-img">
+                <img
+                  src="https://media.iceportal.com/43634/photos/65355143_XXL.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <div
+              className="col-lg-6 pt-4 mt-4 pt-lg-0 order-2 order-lg-1 content"
+              data-aos="fade-up"
+            >
+              <p className="text-align: center">
+                Restauranty is a restaurant reservation system designed to
+                create a seamless and enjoyable booking experience for
+                customers. Through an intuitive online portal and app, customers
+                can easily explore available reservation slots, choose their
+                preferred date and time, and specify the size of their party.
+                The system offers real-time availability updates, enabling
+                customers to make informed decisions. It also allows customers
+                to customize their dining experience by selecting their
+                preferred seating area or table. Once a reservation is made,
+                customers receive immediate confirmations and timely reminders,
+                reducing no-shows. The system's integration with the
+                restaurant's POS system streamlines operations, and customers
+                can modify or cancel reservations as needed. Overall,
+                Restauranty focuses on enhancing customer satisfaction and
+                efficiency in the dining reservation process.{" "}
+              </p>
+              <div className="btns">
+                <a
+                  href="https://en.wikipedia.org/wiki/Indian_cuisine"
+                  className="btn-book animated fadeInUp scrollto"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Read More...
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+
+      <section id="why-us" className="why-us">
+        <div className="container" data-aos="fade-up">
+          <div className="section-title">
             <h2>Why Us</h2>
             <p>Why Choose Our Restaurant</p>
           </div>
 
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="box" data-aos="zoom-in" data-aos-delay="100">
+          <div className="row">
+            <div className="col-lg-4">
+              <div className="box" data-aos="zoom-in" data-aos-delay="100">
                 <span>01</span>
                 <h4>Lorem Ipsum</h4>
                 <p>
@@ -241,8 +216,8 @@ const AboutScreen = () => {
               </div>
             </div>
 
-            <div class="col-lg-4 mt-4 mt-lg-0">
-              <div class="box" data-aos="zoom-in" data-aos-delay="200">
+            <div className="col-lg-4 mt-4 mt-lg-0">
+              <div className="box" data-aos="zoom-in" data-aos-delay="200">
                 <span>02</span>
                 <h4>Repellat Nihil</h4>
                 <p>
@@ -252,8 +227,8 @@ const AboutScreen = () => {
               </div>
             </div>
 
-            <div class="col-lg-4 mt-4 mt-lg-0">
-              <div class="box" data-aos="zoom-in" data-aos-delay="300">
+            <div className="col-lg-4 mt-4 mt-lg-0">
+              <div className="box" data-aos="zoom-in" data-aos-delay="300">
                 <span>03</span>
                 <h4> Ad ad velit qui</h4>
                 <p>

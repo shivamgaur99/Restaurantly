@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom"; 
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -61,57 +61,41 @@ function App() {
         {/* <Navbar /> */}
         <TopBar />
         <Header />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/home" exact component={Home} />
+        <Routes> {/* Use Routes instead of Switch */}
+          <Route path="/" exact element={<Home />} /> {/* Use element prop instead of component */}
+          <Route path="/home" exact element={<Home />} />
 
-          <Route path="/admin/signup" exact component={AdminSignupScreen} />
-          <Route path="/admin/signin" exact component={AdminSigninScreen} />
-          <Route path="/signin" exact component={CustomerSigninScreen} />
-          <Route path="/signup" exact component={CustomerSignupScreen} />
-          <Route
-            exact
-            path="/owneraddemployee"
-            component={OwnerAddEmployeeScreen}
-          />
+          <Route path="/admin/signup" exact element={<AdminSignupScreen />} />
+          <Route path="/admin/signin" exact element={<AdminSigninScreen />} />
+          <Route path="/signin" exact element={<CustomerSigninScreen />} />
+          <Route path="/signup" exact element={<CustomerSignupScreen />} />
+          <Route exact path="/owneraddemployee" element={<OwnerAddEmployeeScreen />} />
 
-          <Route path="/updatestock" component={UpdateStockScreen} />
-          <Route path="/menu" component={MenuScreen} />
-          <Route path="/addmenu" component={AddMenuScreen} />
-          <Route path="/editmenu" component={EditMenu} />
-          <Route exact path="/stocks" component={CheckStockScreen} />
-          <Route exact path="/feedback" component={FeedBackScreen} />
-          <Route exact path="/profile" component={AdminUpdateProfile} />
-          <Route exact path="/ownertables" component={OwnerTableScreen} />
-          <Route exact path="/cart" component={CartScreen} />
-          <Route exact path="/customermenu" component={CustomerMenuScreen} />
-          <Route exact path="/addtable" component={OwnerAddTableScreen} />
-          <Route exact path="/orders" component={CustomerGetOrdersScreen} />
-          <Route exact path="/about" component={AboutScreen} />
-          <Route exact path="/acceptpayment" component={AcceptPaymentScreen} />
-          <Route
-            exact
-            path="/acceptfeedback"
-            component={AcceptFeedBackScreen}
-          />
+          <Route path="/updatestock" element={<UpdateStockScreen />} />
+          <Route path="/menu" element={<MenuScreen />} />
+          <Route path="/addmenu" element={<AddMenuScreen />} />
+          <Route path="/editmenu" element={<EditMenu />} />
+          <Route exact path="/stocks" element={<CheckStockScreen />} />
+          <Route exact path="/feedback" element={<FeedBackScreen />} />
+          <Route exact path="/profile" element={<AdminUpdateProfile />} />
+          <Route exact path="/ownertables" element={<OwnerTableScreen />} />
+          <Route exact path="/cart" element={<CartScreen />} />
+          <Route exact path="/customermenu" element={<CustomerMenuScreen />} />
+          <Route exact path="/addtable" element={<OwnerAddTableScreen />} />
+          <Route exact path="/orders" element={<CustomerGetOrdersScreen />} />
+          <Route exact path="/about" element={<AboutScreen />} />
+          <Route exact path="/acceptpayment" element={<AcceptPaymentScreen />} />
+          <Route exact path="/acceptfeedback" element={<AcceptFeedBackScreen />} />
 
-          <Route exact path="/ingredients" component={SupplierScreen} />
-          <Route exact path="/addingredients" component={AddIngredientScreen} />
-          <Route exact path="/managechef" component={ManagerManageChefScreen} />
-          <Route
-            exact
-            path="/assignwaiter"
-            component={ManagerAssignWaitersScreen}
-          />
-          <Route exact path="/revenue" component={OwnerRevenueScreen} />
-          <Route exact path="/cheforders" component={ChefOrdersScreen} />
-          <Route
-            exact
-            path="/waiterorders"
-            component={WaiterServeOrderScreen}
-          />
-          <Route exact path="/contactus" component={ContactUsScreen} />
-        </Switch>
+          <Route exact path="/ingredients" element={<SupplierScreen />} />
+          <Route exact path="/addingredients" element={<AddIngredientScreen />} />
+          <Route exact path="/managechef" element={<ManagerManageChefScreen />} />
+          <Route exact path="/assignwaiter" element={<ManagerAssignWaitersScreen />} />
+          <Route exact path="/revenue" element={<OwnerRevenueScreen />} />
+          <Route exact path="/cheforders" element={<ChefOrdersScreen />} />
+          <Route exact path="/waiterorders" element={<WaiterServeOrderScreen />} />
+          <Route exact path="/contactus" element={<ContactUsScreen />} />
+        </Routes>
         <ScrollToTop />
         <Footer />
       </Router>

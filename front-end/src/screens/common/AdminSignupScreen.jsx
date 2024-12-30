@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../actions/adminActions";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -8,18 +8,18 @@ import "./AdminSignupScreen.css";
 
 const AdminSignupScreen = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const adminSignup = useSelector((store) => store.adminSignup);
   const { loading, response, error } = adminSignup;
 
   useEffect(() => {
     if (response) {
-      history.push("/admin/signin");
+      navigate("/admin/signin");
     } else if (error) {
       alert("Error while making API call");
     }
-  }, [loading, response, error, history]);
+  }, [loading, response, error, navigate]);
 
   // Validation schema using Yup
   const validationSchema = Yup.object({
@@ -113,11 +113,11 @@ const AdminSignupScreen = () => {
                 <label htmlFor="role">Role</label>
                 <Field as="select" name="role">
                   <option value="">Select Role</option>
-                  <option value="Manager">Manager</option>
-                  <option value="Chef">Chef</option>
-                  <option value="Waiter">Waiter</option>
-                  <option value="Supplier">Supplier</option>
-                  <option value="Owner">Owner</option>
+                  <option value="MANAGER">Manager</option>
+                  <option value="CHEF">Chef</option>
+                  <option value="WAITER">Waiter</option>
+                  <option value="SUPPLIER">Supplier</option>
+                  <option value="OWNER">Owner</option>
                 </Field>
                 <ErrorMessage
                   name="role"
@@ -130,7 +130,7 @@ const AdminSignupScreen = () => {
                 <button type="submit" className="signup-btn">
                   Signup
                 </button>
-                <div className="signin-link">
+                <div className="signup-link">
                   Existing user? <Link to="/admin/signin">Signin here</Link>
                 </div>
               </div>

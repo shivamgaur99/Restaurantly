@@ -43,8 +43,12 @@ public class WaiterServiceImpl implements IWaiterService {
 	@Override
 	public List<WaiterOrderDTO> getPreparedOrders(int waiterId) {
 		Administration waiter = adminRepo.getOne(waiterId);
+		RestaurantTable table = restaurantTableRepo.findByWaiter(waiter);
+	    if (table == null) {
+	        throw new IllegalStateException("No table assigned to the waiter.");
+	    }
+	    int tableId = table.getTableNo();
 		List<Orders> orders = orderRepo.getUnpaidOrders(waiter, OrderStatus.UNPAID);
-		int tableId = restaurantTableRepo.findByWaiter(waiter).getTableNo();
 		List<WaiterOrderDTO> returnOrders = new ArrayList<>();
 		for(Orders o : orders) {
 			List<OrderDetails> orderDetails = orderDetailsRepo.getPreparedOrders(o, OrderDetailsStatus.PREPARED);

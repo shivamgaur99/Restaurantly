@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import "./Footer.css"; 
 import "boxicons/css/boxicons.min.css";
+import { MdFavorite } from "react-icons/md";
 
 const Footer = () => {
   return (
@@ -32,7 +33,7 @@ const Footer = () => {
                   <a href="https://skype.com" className="google-plus" target="_blank" rel="noopener noreferrer">
                     <i className="bx bxl-skype"></i>
                   </a>
-                  <a href="https://linkedin.com" className="linkedin" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/shivam1gaur" className="linkedin" target="_blank" rel="noopener noreferrer">
                     <i className="bx bxl-linkedin"></i>
                   </a>
                 </div>
@@ -57,7 +58,7 @@ const Footer = () => {
                 <li><i className="bx bx-chevron-right"></i> <Link to="/event-catering">Event Catering</Link></li>
                 <li><i className="bx bx-chevron-right"></i> <Link to="/online-ordering">Online Ordering</Link></li>
                 <li><i className="bx bx-chevron-right"></i> <Link to="/private-events">Private Events</Link></li>
-                <li><i className="bx bx-chevron-right"></i> <Link to="/menu">Menu</Link></li>
+                <li><i className="bx bx-chevron-right"></i> <Link to="/check-menu">Menu</Link></li>
               </ul>
             </div>
 
@@ -78,9 +79,12 @@ const Footer = () => {
         <div className="copyright">
           &copy; {new Date().getFullYear()} <strong><span>Restaurantly</span></strong>. All Rights Reserved
         </div>
-        {/* <div className="credits">
-          Designed by <a href="https://bootstrapmade.com/" target="_blank" rel="noopener noreferrer">BootstrapMade</a>
-        </div> */}
+        <div className="credits">
+          Designed by{" "}
+          <a href="https://github.com/shivamgaur99" target="_blank" rel="noopener noreferrer">
+          <MdFavorite style={{ color: "red", fontSize: "24px" }} /> Shivam Gaur
+          </a>
+        </div>
       </div>
     </footer>
   );

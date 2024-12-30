@@ -34,8 +34,8 @@ const OwnerAddTableScreen = (props) => {
   }, [loading, response, error])
 
   return (
-    <div className="container">
-    <h2>Add Table</h2>
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
+    <h2 className="text-center">Add Table</h2>
     <div className="row justify-content-center">
       <div className="col-lg-6 col-md-8">
         <div className="form">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateMenu } from "../../actions/adminActions";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const EditMenu = (props) => {
   const [menuName, setMenuName] = useState("");
@@ -20,20 +20,20 @@ const EditMenu = (props) => {
   // );
   // console.log(menu);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // const editMenu = () => {
   //   console.log(price);
   //   dispatch(updateMenu(id, menuName, price, category))
   //   .then(() => {
   //     // Redirect on success
-  //     history.push("/menu");
+  //     navigate("/menu");
   //   })
   //   .catch((error) => {
   //     // Handle error and show alert
   //     console.error("Error updating menu:", error);
   //     alert("Failed to update menu. Please try again."); // Show error alert
-  //     history.push("/menu");
+  //     navigate("/menu");
   //   });;
   // };
 
@@ -41,11 +41,11 @@ const EditMenu = (props) => {
     try {
       await dispatch(updateMenu(id, menuName, price, category));
       alert("Update Successfully");
-      history.push("/menu"); // Redirect on success
+      navigate("/menu"); // Redirect on success
     } catch (error) {
       console.error("Error updating menu:", error);
       alert("Failed to update menu. Please try later."); // Show error alert
-      history.push("/menu");
+      navigate("/menu");
     }
   };
 
@@ -76,11 +76,11 @@ const EditMenu = (props) => {
       category,
     };
     dispatch(updateMenu(updatedMenu)); // Dispatch an action to update the menu
-    props.history.push("/menuscreen"); // Redirect back to the menu screen
+    props.navigate("/menuscreen"); // Redirect back to the menu screen
   };
 
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: "100px" }}>
       <div className="row mt-3">
         <div className="col-md-12">
           <h2 className="my-4">Edit Menu Item</h2>
@@ -128,7 +128,7 @@ const EditMenu = (props) => {
               <button
                 type="button"
                 className="btn btn-secondary ms-3"
-                onClick={() => props.history.push("/menu")}
+                onClick={() => props.navigate("/menu")}
               >
                 Cancel
               </button>

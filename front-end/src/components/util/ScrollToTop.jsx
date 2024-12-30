@@ -41,16 +41,16 @@ function ScrollToTop() {
 
   return (
     <a
-        href="#"
-        className="back-to-top d-flex align-items-center justify-content-center"
-        onClick={(e) => {
-          e.preventDefault();  
-          scrollToTop();       
-        }}
-      >
-        <i className="bi bi-arrow-up-short"></i>
-      </a>
+      href="#"
+      className={`back-to-top d-flex align-items-center justify-content-center ${visible ? 'active' : ''}`}
+      onClick={(e) => {
+        e.preventDefault();
+        scrollToTop();
+      }}
+    >
+      <i className="bi bi-arrow-up-short"></i>
+    </a>
   );
-}
+}  
 
 export default ScrollToTop;

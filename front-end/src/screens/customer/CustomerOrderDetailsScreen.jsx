@@ -19,10 +19,10 @@ const CustomerOrderDetailsScreen = (props) => {
   // let data = Array.prototype(stockChecking.response)
 
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
       <div className="row">
         <div className="col-md-12">
-          <table className="table table-striped">
+          <table className="table table-striped text-white">
             <thead>
               <tr>
                 <th>Id</th>
@@ -38,7 +38,7 @@ const CustomerOrderDetailsScreen = (props) => {
                 response.data.length > 0 &&
                 response.data.map((order, index) => {
                   return (
-                    <tr key={index}>
+                    <tr key={index} className='text-white' >
                       <td>{order.id}</td>
                       <td>{order.amount}</td>
                       <td>{order.category}</td>

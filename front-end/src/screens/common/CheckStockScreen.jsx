@@ -21,7 +21,7 @@ const CheckStockScreen = (props) => {
   // let data = Array.prototype(stockChecking.response)
 
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: "100px" }}>
       <input
         style={{ marginTop: 5 }}
         type="text"
@@ -32,7 +32,7 @@ const CheckStockScreen = (props) => {
         }}
       />
 
-      <table className="table table-striped">
+      <table className="table table-striped text-white">
         <thead>
           <tr>
             <th>Id</th>
@@ -57,7 +57,7 @@ const CheckStockScreen = (props) => {
               })
               .map((ing) => {
                 return (
-                  <tr key={ing.id}>
+                  <tr key={ing.id} className='text-white'>
                     <td>{ing.id}</td>
                     <td>{ing.ingredient}</td>
                     <td>{ing.qty}</td>

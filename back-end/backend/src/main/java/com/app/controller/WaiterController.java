@@ -33,7 +33,12 @@ public class WaiterController {
 	}
 	
 	@GetMapping("/getorder/{waiterId}")
-	public ResponseEntity<?> getPreparedOrders(@PathVariable int waiterId){
-		return new ResponseEntity<>(waiterService.getPreparedOrders(waiterId),HttpStatus.OK);
+	public ResponseEntity<?> getPreparedOrders(@PathVariable int waiterId) {
+	    try {
+	        return new ResponseEntity<>(waiterService.getPreparedOrders(waiterId), HttpStatus.OK);
+	    } catch (IllegalStateException e) {
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	    }
 	}
+
 }

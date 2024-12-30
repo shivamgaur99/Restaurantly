@@ -33,8 +33,8 @@ const ManagerAssignWaitersScreen = (props) => {
   }
 
   return (
-    <div className="container">
-      <table className="table table-striped">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
+      <table className="table table-striped text-white">
         <thead>
           <tr>
             <th>Table No</th>
@@ -49,7 +49,7 @@ const ManagerAssignWaitersScreen = (props) => {
             response2.data.length > 0 &&
             response2.data.map((table) => {
               return (
-                <tr key={table.tableNo}>
+                <tr key={table.tableNo} className="text-white">
                   <td>{table.tableNo}</td>
                   <td>{table.capacity}</td>
                   <td>{table.status}</td>

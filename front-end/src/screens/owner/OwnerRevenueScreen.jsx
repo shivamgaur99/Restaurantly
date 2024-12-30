@@ -50,11 +50,11 @@ const OwnerRevenueScreen = () => {
   }, [])
 
   return (
-    <div>
+    <div className='container p-5 text-white' style={{ marginTop: '100px' }}>
       <div className="row" style={{ paddingTop: '15px' }}>
         {response && (
           <div
-            className="col border border-secondary"
+            className="col border border-secondary text-white"
             style={{ height: '100px', backgroundColor: 'rgba(51,153,255,0.7)' }}
           >
             <h4>Today's Revenue</h4>
@@ -63,7 +63,7 @@ const OwnerRevenueScreen = () => {
         )}
         {response1 && (
           <div
-            className="col border border-secondary"
+            className="col border border-secondary text-white"
             style={{ height: '100px', backgroundColor: 'rgba(249,177,21,0.7)' }}
           >
             <h4>Weekly Revenue</h4>
@@ -72,7 +72,7 @@ const OwnerRevenueScreen = () => {
         )}
         {response2 && (
           <div
-            className="col border border-secondary"
+            className="col border border-secondary text-white"
             style={{ height: '100px', backgroundColor: 'rgba(229,83,83,0.7)' }}
           >
             <h4>{months[month]} Revenue</h4>

@@ -23,13 +23,13 @@ const AcceptPaymentScreen = (props) => {
     dispatch(getallordersWithId(custid))
   }
 
-  console.log('rohit')
+  console.log('shivam')
   console.log(response)
   useEffect(() => {}, [error, response, loading])
   // let data = Array.prototype(stockChecking.response)
 
   return (
-    <div className="container mt-4">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
       <input
         style={{ marginTop: 10 }}
         type="number"
@@ -48,7 +48,7 @@ const AcceptPaymentScreen = (props) => {
       >
         Get Orders
       </button>
-      <table className="table table-striped mt-3">
+      <table className="table table-striped mt-3 text-white">
         <thead>
           <tr>
             <th>Id</th>
@@ -65,7 +65,7 @@ const AcceptPaymentScreen = (props) => {
             response.data.map((order) => {
               return (
                 order.status === 'UNPAID' && (
-                  <tr key={order.id}>
+                  <tr key={order.id} className="text-white">
                     <td>{order.id}</td>
                     <td>{order.amount}</td>
                     <td>{order.status}</td>

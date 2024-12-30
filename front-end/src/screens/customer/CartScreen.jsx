@@ -51,10 +51,10 @@ const CartScreen = (props) => {
   }
 
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
       <div className="row">
         <div className="col-md-12">
-          <table className="table table-striped">
+          <table className="table table-striped text-white">
             <thead>
               <tr>
                 <th>Menu</th>
@@ -69,7 +69,7 @@ const CartScreen = (props) => {
                 response.data.map((cart) => {
                   total += cart.amount;
                   return (
-                    <tr key={cart.menuId}>
+                    <tr key={cart.menuId} className="text-white">
                       <td>{cart.menuName}</td>
                       <td>{cart.quantity}</td>
                       <td>{cart.amount}</td>
@@ -99,7 +99,7 @@ const CartScreen = (props) => {
                   );
                 })}
               <tr>
-                <td colSpan="3">
+                <td colSpan="3" className="text-white">
                   <hr />
                   Total = {total}
                 </td>

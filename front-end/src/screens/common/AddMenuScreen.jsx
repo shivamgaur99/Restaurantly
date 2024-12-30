@@ -62,7 +62,7 @@ const AddMenuScreen = (props) => {
   }, [loading1, response1, error1]);
 
   return (
-    <div className="container mt-5">
+    <div className="container p-4 text-white" style={{ marginTop: "100px" }}>
       <h2>AddMenu</h2>
       <div className="form">
         <div className="mb-3">
@@ -109,7 +109,7 @@ const AddMenuScreen = (props) => {
             placeholder=""
           />
         </div>
-        <table className="table table-striped">
+        <table className="table table-striped text-white">
           <thead>
             <tr>
               <th>ID</th>
@@ -122,7 +122,7 @@ const AddMenuScreen = (props) => {
               response.data &&
               response.data.length > 0 &&
               response.data.map((ing) => (
-                <tr key={ing.id}>
+                <tr key={ing.id} className="text-white">
                   <td>{ing.id}</td>
                   <td>{ing.name}</td>
                   <td>
@@ -132,6 +132,7 @@ const AddMenuScreen = (props) => {
                       }}
                       type="checkbox"
                       value={ing.id}
+                      style={{ cursor: "pointer" }}
                     />
                   </td>
                 </tr>

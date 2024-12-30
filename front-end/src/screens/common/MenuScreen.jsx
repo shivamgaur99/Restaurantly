@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { deleteMenuItem, getmenu } from "../../actions/adminActions";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "react-notifications-component";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const MenuScreen = (props) => {
   const [search, setSearch] = useState("");
@@ -11,7 +11,7 @@ const MenuScreen = (props) => {
 
   const { loading, response, error } = menu;
 
-  const history = useHistory();
+  const navigate = useNavigate();;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const MenuScreen = (props) => {
   useEffect(() => {}, [error, response, loading]);
 
   const addMenu = () => {
-    props.history.push("/addmenu");
+    props.navigate("/addmenu");
   };
 
   const deleteMenu = async (menuId) => {
@@ -35,7 +35,7 @@ const MenuScreen = (props) => {
     } catch (error) {
       console.error("Error deleting menu item:", error);
       alert("Failed to delete menu item. Please try later."); // Show error alert
-      history.push("/menu");
+      navigate("/menu");
     }
   };
 
@@ -49,7 +49,7 @@ const MenuScreen = (props) => {
     setSearch("nonveg");
   };
   return (
-    <div className="container">
+    <div className="container p-5 text-white" style={{ marginTop: "100px" }}>
       <div className="row mt-3">
         <div className="col-md-6">
           <input
@@ -79,7 +79,7 @@ const MenuScreen = (props) => {
       </div>
       <div className="row mt-3">
         <div className="col-md-12">
-          <table className="table table-striped">
+          <table className="table table-striped text-white">
             <thead>
               <tr>
                 <th>Id</th>
@@ -109,7 +109,7 @@ const MenuScreen = (props) => {
                   })
                   .map((menu) => {
                     return (
-                      <tr key={menu.id}>
+                      <tr key={menu.id} className="text-white">
                         <td>{menu.id}</td>
                         <td>{menu.menuName}</td>
                         <td>{menu.price}</td>

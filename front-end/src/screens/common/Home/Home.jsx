@@ -7,6 +7,7 @@ import BookATable from "./components/BookATable";
 import Testimonials from "./components/Testimonials";
 import Chefs from "./components/Chefs";
 import Gallery from "./components/Gallery";
+import Intro from "./components/Intro";
 
 function Home() {
   return (
@@ -14,6 +15,7 @@ function Home() {
       <HeroSection />
       <Menu />
       <Specials />
+      <Intro/>
       <Events />
       <BookATable />
       <Gallery />

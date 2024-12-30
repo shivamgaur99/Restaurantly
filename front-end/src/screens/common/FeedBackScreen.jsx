@@ -14,9 +14,9 @@ const FeedBackScreen = (props) => {
   }, [])
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Feedback</h2>
-      <table className="table table-striped">
+    <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
+      <h2 className="text-center">Feedback</h2>
+      <table className="table table-striped text-white">
         <thead>
           <tr>
             <th>ID</th>
@@ -29,7 +29,7 @@ const FeedBackScreen = (props) => {
             response.data &&
             response.data.length > 0 &&
             response.data.map((feed) => (
-              <tr key={feed.id}>
+              <tr key={feed.id} className="text-white">
                 <td>{feed.id}</td>
                 <td>{feed.message}</td>
                 <td>{feed.rating}</td>

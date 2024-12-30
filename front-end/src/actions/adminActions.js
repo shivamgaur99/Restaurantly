@@ -119,13 +119,10 @@ export const signin = (username, password) => {
     axios
       .post(url, body, header)
       .then((response) => {
-        dispatch(
-          {
-            type: ADMIN_SIGNIN_SUCCESS,
-            payload: response.data,
-          },
-          console.log(response.data)
-        );
+        dispatch({
+          type: ADMIN_SIGNIN_SUCCESS,
+          payload: response.data,
+        });
       })
       .catch((error) => {
         dispatch({
@@ -148,8 +145,6 @@ export const getstock = () => {
         Authorization: sessionStorage["token"],
       },
     };
-
-    console.log(header.headers["Authorization"]);
 
     const url = "http://localhost:8383/admin/stocks";
     axios
@@ -183,7 +178,6 @@ export const getProfile = () => {
     };
 
     const adminId = sessionStorage["id"];
-    console.log(header.headers["Authorization"]);
 
     const url = `http://localhost:8383/admin/get/${adminId}`;
     axios
@@ -215,8 +209,6 @@ export const getSupplier = (id) => {
         Authorization: sessionStorage["token"],
       },
     };
-
-    console.log(header.headers["Authorization"]);
 
     const url = `http://localhost:8383/supplier/getingredinet/${id}`;
     axios
@@ -319,7 +311,6 @@ export const updatestock = (id, name, qty) => {
       name,
       qty,
     };
-    console.log(header.headers["Authorization"]);
 
     const url = "http://localhost:8383/admin/updatestock";
     axios
@@ -352,8 +343,6 @@ export const getmenu = () => {
       },
     };
 
-    console.log(header.headers["Authorization"]);
-
     const url = "http://localhost:8383/menu/getall";
     axios
       .get(url, header)
@@ -385,8 +374,6 @@ export const getFeedback = () => {
       },
     };
 
-    console.log(header.headers["Authorization"]);
-
     const url = "http://localhost:8383/admin/feedback";
     axios
       .get(url, header)
@@ -417,8 +404,6 @@ export const getingredinet = () => {
         Authorization: sessionStorage["token"],
       },
     };
-
-    console.log(header.headers["Authorization"]);
 
     const url = "http://localhost:8383/ingredients/list";
     axios
@@ -460,8 +445,6 @@ export const addMenuItem = (menuName, category, price, ingredients) => {
       }),
     };
 
-    console.log(header.headers["Authorization"]);
-
     const url = "http://localhost:8383/menu/add";
     axios
       .post(url, body, header)
@@ -500,7 +483,6 @@ export const updateProfile = (name, username, email, role) => {
       email,
       role,
     };
-    console.log(header.headers["Authorization"]);
 
     const url = `http://localhost:8383/admin/update/${id}`;
     axios
