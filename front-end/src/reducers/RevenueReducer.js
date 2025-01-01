@@ -28,7 +28,7 @@ export const allWeekRevenueReducer = (state = {}, action) => {
     case GET_ALLWEEKREVENUE_FAIL:
       return { loading: false, error: action.payload }
     default:
-      return state
+       return state;
   }
 }
 
@@ -41,7 +41,7 @@ export const allMonthRevenueReducer = (state = {}, action) => {
     case GET_ALLMONTHREVENUE_FAIL:
       return { loading: false, error: action.payload }
     default:
-      return state
+       return state;
   }
 }
 
@@ -54,7 +54,7 @@ export const todaysRevenueReducer = (state = {}, action) => {
     case GET_TODAYSREVENUE_FAIL:
       return { loading: false, error: action.payload }
     default:
-      return state
+       return state;
   }
 }
 
@@ -67,7 +67,7 @@ export const thisWeekRevenueReducer = (state = {}, action) => {
     case GET_THISWEEKREVENUE_FAIL:
       return { loading1: false, error1: action.payload }
     default:
-      return state
+       return state;
   }
 }
 
@@ -80,7 +80,7 @@ export const thisMonthRevenueReducer = (state = {}, action) => {
     case GET_THISMONTHSREVENUE_FAIL:
       return { loading2: false, error2: action.payload }
     default:
-      return state
+       return state;
   }
 }
 
@@ -93,6 +93,6 @@ export const thisYearRevenueReducer = (state = {}, action) => {
     case GET_THISYEARSREVENUE_FAIL:
       return { loading3: false, error3: action.payload }
     default:
-      return state
+       return state;
   }
 }

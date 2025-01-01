@@ -22,9 +22,9 @@ export const ownerAddEmployeeReducer = (state = {}, action) => {
     case OWNER_ADDEMPLOYEE_FAIL:
       return { loading: false, error: action.payload }
     case RESET_ADDEMPLOYEE_STATE:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -37,9 +37,9 @@ export const ownergetalltablesReducer = (state = {}, action) => {
     case GET_TABLE_FAIL:
       return { loading: false, error: action.payload }
     case RESET_TABLE_STATE:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -52,8 +52,8 @@ export const owneraddtableReducer = (state = {}, action) => {
     case ADD_TABLE_FAIL:
       return { loading: false, error: action.payload }
     case RESET_ADDTABLE_STATE:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }

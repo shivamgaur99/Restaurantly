@@ -16,18 +16,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.config.JwtTokenUtil;
 import com.app.dto.AdminResponseDTO;
+import com.app.dto.ErrorResponse;
 import com.app.dto.StockDTO;
 import com.app.model.JwtRequest;
 import com.app.pojos.AdminRoles;
 import com.app.pojos.Administration;
-import com.app.pojos.Feedback;
 import com.app.service.IAdminService;
 
 @RestController
@@ -49,21 +48,45 @@ public class AdminController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> validateAdmin(@RequestBody JwtRequest login) {
-		try {
-			authenticate(login.getUsername(), login.getPassword());
-		} catch (Exception e) {
+	    try {
+	        // Authenticate the user (throws exception if credentials are invalid)
+	        authenticate(login.getUsername(), login.getPassword());
+	    } catch (BadCredentialsException e) {
+	        // Return 401 Unauthorized if authentication fails
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                .body(new ErrorResponse("Invalid username or password", e.getMessage()));
+	    } catch (Exception e) {
+	        // Handle other exceptions
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(new ErrorResponse("An error occurred while processing your request", e.getMessage()));
+	    }
 
-			e.printStackTrace();
-		}
+	    // Load user details from the service (if authentication passes)
+	    final UserDetails userDetails = adminService.loadUserByUsername(login.getUsername());
 
-		final UserDetails userDetails = adminService.loadUserByUsername(login.getUsername());
+	    // Pass both username and password to validateAdmin method
+	    Administration admin = adminService.validateAdmin(login.getUsername(), login.getPassword());
+	    if (admin == null) {
+	        // If admin is not found or password doesn't match
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                .body(new ErrorResponse("Invalid username or password", "Invalid credentials or account not found"));
+	    }
 
-		Administration a = adminService.validateAdmin(login.getUsername(), bcryptEncoder.encode(login.getPassword()));
-		System.out.println(a);
-		final String token = jwtTokenUtil.generateToken(userDetails);
+	    // Generate JWT token
+	    final String token = jwtTokenUtil.generateToken(userDetails);
 
-		return ResponseEntity.ok(new AdminResponseDTO(a.getId(),a.getName(), a.getUsername(), a.getEmail(), a.getRole(), token));
+	    // Return admin details and JWT token
+	    return ResponseEntity.ok(new AdminResponseDTO(
+	            admin.getId(),
+	            admin.getName(),
+	            admin.getUsername(),
+	            admin.getEmail(),
+	            admin.getRole(),
+	            token
+	    ));
 	}
+
 
 	// Register Administration Person
 	@PostMapping("/register")
@@ -116,10 +139,10 @@ public class AdminController {
 	}
 
 	@GetMapping("/feedback")
-	public ResponseEntity<?> getFeedBack()
-	{
-		return new ResponseEntity<>(adminService.getFeedBack(),HttpStatus.OK);
+	public ResponseEntity<?> getFeedBack() {
+		return new ResponseEntity<>(adminService.getFeedBack(), HttpStatus.OK);
 	}
+
 	@GetMapping("chefs")
 	public ResponseEntity<?> getAllChefs() {
 		List<AdminResponseDTO> waiters = new ArrayList<AdminResponseDTO>();

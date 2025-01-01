@@ -113,7 +113,7 @@ export const adminupdateReducer = (state = {}, action) => {
     case UPDATE_STOCK_FAIL:
       return { loading1: false, error1: action.payload };
     case RESET_UPDATE_STOCK:
-      return (state = "");
+       return {};
     default:
       return state;
   }
@@ -183,7 +183,7 @@ export const adminAddMenuReducer = (state = {}, action) => {
     case ADD_MENU_FAIL:
       return { loading1: false, error1: action.payload };
     case RESET_ADD_MENU:
-      return (state = "");
+       return {};
     default:
       return state;
   }
@@ -198,7 +198,7 @@ export const editMenuReducer = (state = {}, action) => {
     case EDIT_MENU_FAIL:
       return { loading: false, error: action.payload };
     case RESET_EDIT_MENU:
-      return (state = "");
+       return {};
     default:
       return state;
   }
@@ -213,7 +213,7 @@ export const deleteMenuReducer = (state = {}, action) => {
     case DELETE_MENU_FAIL:
       return { loading: false, error: action.payload };
     case RESET_DELETE_MENU:
-      return (state = "");
+       return {};
     default:
       return state;
   }
@@ -228,7 +228,7 @@ export const adminupdateProfileReducer = (state = {}, action) => {
     case UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };
     case RESET_UPDATE_PROFILE:
-      return (state = "");
+       return {};
     default:
       return state;
   }

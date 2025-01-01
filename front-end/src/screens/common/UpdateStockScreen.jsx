@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom' // Import useNavigate
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getSupplier,
@@ -7,15 +7,14 @@ import {
   resetUpdateStock,
 } from '../../actions/adminActions'
 
-const UpdateStockScreen = (props) => {
+const UpdateStockScreen = () => {
   const dispatch = useDispatch()
-  const string = window.location.pathname.split('/')
+  const navigate = useNavigate() // Initialize useNavigate
 
   const [qty, setQty] = useState('')
-  console.log(string[2])
+  const string = window.location.pathname.split('/')
 
   const supplierChecking = useSelector((store) => store.supplierChecking)
-
   const { loading, response, error } = supplierChecking
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const UpdateStockScreen = (props) => {
   }
 
   const updateStock = useSelector((store) => store.updateStock)
-
   const { loading1, response1, error1 } = updateStock
 
   useEffect(() => {
@@ -43,13 +41,13 @@ const UpdateStockScreen = (props) => {
       // user successfully got registered
       console.log('rohit is here ' + response.status)
       dispatch(resetUpdateStock())
-      props.history.push('/stocks')
+      navigate('/stocks') // Use navigate instead of props.history.push
     } else if (error) {
       // there is an error while making the API call
       console.log(error)
       alert('error while making API call')
     }
-  }, [loading1, response1, error1])
+  }, [loading1, response1, error1, dispatch, navigate]) // Added navigate to dependency array
 
   return (
     <div className="container p-5 text-white" style={{ marginTop: '100px' }}>
@@ -76,7 +74,7 @@ const UpdateStockScreen = (props) => {
                   <td>
                     <input
                       onChange={(e) => {
-                        setQty(e.target.value);
+                        setQty(e.target.value)
                       }}
                       type="number"
                     />
@@ -84,14 +82,15 @@ const UpdateStockScreen = (props) => {
                   <td>
                     <button
                       onClick={() => {
-                        updateStockhere(string[2], supplier.ingredient, qty);
+                        updateStockhere(string[2], supplier.ingredient, qty)
                       }}
-                      className="btn btn-success">
+                      className="btn btn-success"
+                    >
                       Give Order
                     </button>
                   </td>
                 </tr>
-              );
+              )
             })}
         </tbody>
       </table>

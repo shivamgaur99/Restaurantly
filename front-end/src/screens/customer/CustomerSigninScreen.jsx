@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signin } from "../../actions/customerActions";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import "./CustomerSigninScreen.css"; // Make sure to import the corresponding CSS file
+import "./CustomerSigninScreen.css";
 
 const validationSchema = Yup.object({
   username: Yup.string()
@@ -15,8 +15,9 @@ const validationSchema = Yup.object({
     .required("Password is required")
 });
 
-const CustomerSigninScreen = (props) => {
+const CustomerSigninScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const customerSignin = useSelector((store) => store.customerSignin);
   const { loading1, error1, response1 } = customerSignin;
@@ -31,16 +32,15 @@ const CustomerSigninScreen = (props) => {
       sessionStorage.setItem("token", "Bearer " + response1.token);
       sessionStorage.setItem("Loggedin", true);
       sessionStorage.setItem("role", "CUSTOMER");
-      props.history.push("/customermenu");
-    } else if (response1 && response1.status === "error") {
-      alert(response1.error);
+      navigate("/customermenu");
+      window.location.reload();
     } else if (error1) {
-      alert(error1);
+      alert(error1); // Handle error message
     }
-  }, [loading1, error1, response1]);
+  }, [response1, error1, navigate]);
 
   const onSignin = (values) => {
-    dispatch(signin(values.username, values.password));
+    dispatch(signin(values.username, values.password)); // Dispatch signin action
   };
 
   return (
@@ -77,7 +77,9 @@ const CustomerSigninScreen = (props) => {
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="signin-btn">Signin</button>
+              <button type="submit" className="signin-btn" disabled={loading1}>
+                {loading1 ? "Signing In..." : "Signin"}
+              </button>
               <div className="signup-link">
                 New User? <Link to="/signup">Signup here</Link>
               </div>
@@ -85,7 +87,8 @@ const CustomerSigninScreen = (props) => {
           </Form>
         </Formik>
 
-        {loading1 && <div className="loading">Loading...</div>}
+        {loading1 && <div className="loading-spinner text-center">Loading...</div>}
+        {error1 && <div className="error-message text-center">{error1}</div>} {/* Display error if any */}
       </div>
     </div>
   );

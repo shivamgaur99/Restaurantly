@@ -9,18 +9,17 @@ import { SupplierSidebarData } from "../sidebardata/SupplierSidebarData";
 import { CustomerSidebarData } from "../sidebardata/CustomerSidebarData";
 import { adminLogout } from "../../actions/adminActions";
 import { customerLogout } from "../../actions/customerActions";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "./Header.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isTopbarHidden, setIsTopbarHidden] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const loggedin = sessionStorage["Loggedin"];
-  const role = sessionStorage["role"];
+  const loggedin = sessionStorage.getItem("Loggedin");
+  const role = sessionStorage.getItem("role");
 
   const dispatch = useDispatch();
 
@@ -31,16 +30,12 @@ const Header = () => {
 
   let user = adminSignin?.response?.role || null;
   let customer = customerSignin?.response1 || false;
+  let show = !!role;
 
-  let show = false;
-  if (adminSignin.loading == false && response) {
+  if (adminSignin?.loading === false && response) {
     user = adminSignin.response.role;
     show = true;
     customer = false;
-  }
-
-  if (role) {
-    show = true;
   }
 
   const onLogout = () => {
@@ -55,19 +50,9 @@ const Header = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // const handleScroll = () => {
-  //   setIsScrolled(window.scrollY > 100);
-  // };
-
   const handleScroll = () => {
     const currentScrollPosition = window.scrollY;
-    setIsScrolled(currentScrollPosition);
-
-    if (currentScrollPosition > 100) {
-      setIsTopbarHidden(true);
-    } else {
-      setIsTopbarHidden(false);
-    }
+    setIsScrolled(currentScrollPosition > 100);
   };
 
   const toggleMenu = () => {
@@ -83,7 +68,7 @@ const Header = () => {
     if (dropdown) {
       dropdown.classList.toggle("dropdown-active");
     }
-  };  
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -124,12 +109,9 @@ const Header = () => {
           className="custom-sidebar"
           style={{
             position: "fixed",
-            top: 0,
+            top: "120px",
             left: 0,
             zIndex: 999,
-            // height: "100%",
-            // top: isTopbarHidden ? '-40px' : '0px',
-            marginTop: "120px",
           }}
         >
           <Menu iconShape="square">
@@ -137,9 +119,7 @@ const Header = () => {
               onClick={toggleSidebar}
               icon={sidebarOpen ? <FaTimes /> : <FaBars />}
             >
-              <Link to={sidebarOpen ? <FaTimes /> : <FaBars />}>
-                Restaurantly
-              </Link>
+              <Link to="/">Restaurantly</Link>
             </MenuItem>
 
             {getSidebarData().map((item, index) => (
@@ -235,14 +215,14 @@ const Header = () => {
               </Link>
             </li>
 
-            {/* Conditionally render Sign In/Sign Up dropdown or logout */}
             {!show ? (
               <li className="dropdown">
-                <a href="#"
-                 onClick={(e) => {
-                  e.preventDefault();
-                  toggleDropdown(e);
-                }}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleDropdown(e);
+                  }}
                 >
                   <span>Sign In / Sign Up</span>
                   <i className="bi bi-chevron-down"></i>
@@ -257,26 +237,13 @@ const Header = () => {
                   <li>
                     <a href="/admin/signin">Admin?</a>
                   </li>
-                  {/* <li className="dropdown">
-                    <a href="#">
-                      <span>Admin?</span> <i className="bi bi-chevron-right"></i>
-                    </a>
-                    <ul>
-                      <li>
-                        <a href="/admin/signin">Admin Sign In</a>
-                      </li>
-                      <li>
-                        <a href="/admin/signup">Admin Sign Up</a>
-                      </li>
-                    </ul>
-                  </li> */}
                 </ul>
               </li>
             ) : (
               <li onClick={onLogout}>
-              <a className="nav-link scrollto" href="#">
-                Logout
-              </a>
+                <a className="nav-link scrollto" href="#">
+                  Logout
+                </a>
               </li>
             )}
           </ul>

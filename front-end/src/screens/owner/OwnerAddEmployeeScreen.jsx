@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee } from "../../actions/owneraction/ownerAction";
 import { resetAddEmployee } from "../../actions/owneraction/ownerAction";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./OwnerAddEmployee.css";
 
-const OwnerAddEmployee = (props) => {
+const OwnerAddEmployee = () => {
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +21,7 @@ const OwnerAddEmployee = (props) => {
 
   const user = sessionStorage["role"];
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Use navigate hook
 
   const ownerAddEmployee = useSelector((store) => store.ownerAddEmployee);
   const { loading, response, error } = ownerAddEmployee;
@@ -28,14 +30,14 @@ const OwnerAddEmployee = (props) => {
     if (response && response.status === 200) {
       dispatch(resetAddEmployee());
       if (user === "MANAGER") {
-        props.history.push("/managechef");
+        navigate("/managechef"); // Use navigate instead of props.history.push
       } else if (user === "OWNER") {
-        props.history.push("/revenue");
+        navigate("/revenue"); // Use navigate instead of props.history.push
       }
     } else if (error) {
       alert("Error while making API call");
     }
-  }, [loading, response, error]);
+  }, [loading, response, error, dispatch, user, navigate]);
 
   const validateForm = () => {
     let isValid = true;

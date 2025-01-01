@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../actions/customerActions";
 import * as Yup from "yup";
@@ -33,19 +33,21 @@ const validationSchema = Yup.object({
   country: Yup.string().required("Country is required")
 });
 
-const CustomerSignupScreen = (props) => {
+const CustomerSignupScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const customerSignup = useSelector((store) => store.customerSignup);
   const { loading, response, error } = customerSignup;
 
   useEffect(() => {
     if (response) {
-      props.history.push("/signin");
-    } else if (error) {
-      alert("Error while making API call");
+      navigate("/signin");
     }
-  }, [loading, response, error]);
+    if (error) {
+      console.error("Signup Error:", error); // You can show the error in a more user-friendly way here.
+    }
+  }, [response, error, navigate]);
 
   const onSignup = (values) => {
     const { name, username, email, password, contact, address, city, state, country } = values;
@@ -77,106 +79,68 @@ const CustomerSignupScreen = (props) => {
           <Form className="customer-signup-form-container">
             <div className="customer-signup-form-group">
               <label>Name</label>
-              <Field
-                name="name"
-                type="text"
-                placeholder="Enter your name"
-              />
+              <Field name="name" type="text" placeholder="Enter your name" />
               <ErrorMessage name="name" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>Username</label>
-              <Field
-                name="username"
-                type="text"
-                placeholder="Enter your username"
-              />
+              <Field name="username" type="text" placeholder="Enter your username" />
               <ErrorMessage name="username" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>Email</label>
-              <Field
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-              />
+              <Field name="email" type="email" placeholder="Enter your email" />
               <ErrorMessage name="email" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>Password</label>
-              <Field
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-              />
+              <Field name="password" type="password" placeholder="Enter your password" />
               <ErrorMessage name="password" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>Confirm Password</label>
-              <Field
-                name="confirmPassword"
-                type="password"
-                placeholder="Confirm your password"
-              />
+              <Field name="confirmPassword" type="password" placeholder="Confirm your password" />
               <ErrorMessage name="confirmPassword" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>Contact</label>
-              <Field
-                name="contact"
-                type="text"
-                placeholder="Enter your contact number"
-              />
+              <Field name="contact" type="text" placeholder="Enter your contact number" />
               <ErrorMessage name="contact" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>Address</label>
-              <Field
-                name="address"
-                type="text"
-                placeholder="Enter your address"
-              />
+              <Field name="address" type="text" placeholder="Enter your address" />
               <ErrorMessage name="address" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>City</label>
-              <Field
-                name="city"
-                type="text"
-                placeholder="Enter your city"
-              />
+              <Field name="city" type="text" placeholder="Enter your city" />
               <ErrorMessage name="city" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>State</label>
-              <Field
-                name="state"
-                type="text"
-                placeholder="Enter your state"
-              />
+              <Field name="state" type="text" placeholder="Enter your state" />
               <ErrorMessage name="state" component="div" className="error-message" />
             </div>
 
             <div className="customer-signup-form-group">
               <label>Country</label>
-              <Field
-                name="country"
-                type="text"
-                placeholder="Enter your country"
-              />
+              <Field name="country" type="text" placeholder="Enter your country" />
               <ErrorMessage name="country" component="div" className="error-message" />
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="signup-btn">Signup</button>
+              <button type="submit" className="signup-btn" disabled={loading}>
+                {loading ? "Signing up..." : "Signup"}
+              </button>
               <div className="signin-link">
                 Existing user? <Link to="/signin">Signin here</Link>
               </div>

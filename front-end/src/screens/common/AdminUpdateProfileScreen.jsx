@@ -1,63 +1,47 @@
 import { useState, useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
 import {
   updateProfile,
   resetUpdateProfile,
-  signin,
   adminLogout,
 } from "../../actions/adminActions";
 
-const AdminUpdateProfile = (props) => {
+const AdminUpdateProfile = () => {
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  // setRole('OWNER')
-
+  
   useEffect(() => {
     setName(sessionStorage["name"]);
     setUserName(sessionStorage["userName"]);
     setEmail(sessionStorage["email"]);
-    setRole(sessionStorage["role"])
+    setRole(sessionStorage["role"]);
   }, []);
-  let name1 = sessionStorage["name"];
-  let username1 = sessionStorage["userName"];
-  let email1 = sessionStorage["email"];
-  let id = sessionStorage["id"];
-  let token = sessionStorage["token"];
+  
   const dispatch = useDispatch();
-  console.log(name + " " + email + " " + role);
-  const updateAdminProfile = () => {
-    
-    dispatch(updateProfile(name, username, email, role));
+  const navigate = useNavigate(); // Use navigate hook for routing
 
+  const updateAdminProfile = () => {
+    dispatch(updateProfile(name, username, email, role));
   };
 
   const updateprofile = useSelector((store) => store.adminupdateProfile);
-
   const { loading, response1, error } = updateprofile;
 
   const adminSignin = useSelector((store) => store.adminSignin);
   const { response } = adminSignin;
 
   useEffect(() => {
-    console.log("use effect called: ");
-    console.log("loading: ", loading);
-    console.log("response: ", response1);
-    console.log("error: ", error);
-
     if (response1) {
       dispatch(resetUpdateProfile());
       dispatch(adminLogout());
-
-      props.history.push("/adminsignin");
+      navigate("/adminsignin"); // Redirect to admin signin page
     } else if (error) {
-      console.log(error);
-      alert("error while making API call");
+      alert("Error while making API call");
     }
-  }, [loading, response1, error]);
+  }, [loading, response1, error, dispatch, navigate]);
 
   return (
     <div className="container p-5 text-white" style={{ marginTop: "100px" }}>
@@ -100,17 +84,6 @@ const AdminUpdateProfile = (props) => {
                   required
                 />
               </div>
-              {/* <div className="mb-3">
-                <label className="form-label">Password</label>
-                <input
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  type="password"
-                  className="form-control"
-                  placeholder="*****"
-                />
-              </div> */}
               <div className="mb-3">
                 <button
                   onClick={updateAdminProfile}

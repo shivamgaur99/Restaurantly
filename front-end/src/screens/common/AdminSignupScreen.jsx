@@ -15,11 +15,11 @@ const AdminSignupScreen = () => {
 
   useEffect(() => {
     if (response) {
-      navigate("/admin/signin");
+      navigate("/admin/signin"); // Navigate to login page after successful signup
     } else if (error) {
-      alert("Error while making API call");
+      alert("Error while making API call: " + error); // Display detailed error message
     }
-  }, [loading, response, error, navigate]);
+  }, [response, error, navigate]);
 
   // Validation schema using Yup
   const validationSchema = Yup.object({
@@ -127,8 +127,8 @@ const AdminSignupScreen = () => {
               </div>
 
               <div className="form-actions">
-                <button type="submit" className="signup-btn">
-                  Signup
+                <button type="submit" className="signup-btn" disabled={loading}>
+                  {loading ? "Signing Up..." : "Signup"}
                 </button>
                 <div className="signup-link">
                   Existing user? <Link to="/admin/signin">Signin here</Link>
@@ -137,6 +137,14 @@ const AdminSignupScreen = () => {
             </Form>
           )}
         </Formik>
+
+        {loading && (
+          <div className="loading-spinner">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

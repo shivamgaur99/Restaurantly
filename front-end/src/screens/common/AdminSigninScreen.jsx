@@ -3,9 +3,9 @@ import { signin } from "../../actions/adminActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./AdminSigninScreen.css"; // Ensure the correct path to your CSS file
+import { useNavigate } from "react-router-dom"; 
+import "./AdminSigninScreen.css"; 
 
-// Yup Validation Schema
 const validationSchema = Yup.object({
   username: Yup.string()
     .email("Enter a valid email address")
@@ -15,8 +15,9 @@ const validationSchema = Yup.object({
     .required("Password is required")
 });
 
-const AdminSigninScreen = (props) => {
+const AdminSigninScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
 
   const adminSignin = useSelector((store) => store.adminSignin);
   const { loading, error, response } = adminSignin;
@@ -34,24 +35,26 @@ const AdminSigninScreen = (props) => {
       sessionStorage.setItem("name", response.name);
       sessionStorage.setItem("Loggedin", true);
       sessionStorage.setItem("token", "Bearer " + response.token);
+  
+      // Redirect based on the role
       if (response.role === "OWNER") {
-        props.history.push("/revenue");
+        navigate("/revenue");
       } else if (response.role === "MANAGER") {
-        props.history.push("/managechef");
+        navigate("/managechef");
       } else if (response.role === "CHEF") {
-        props.history.push("/cheforders");
+        navigate("/cheforders");
       } else if (response.role === "WAITER") {
-        props.history.push("/waiterorders");
+        navigate("/waiterorders");
       } else if (response.role === "SUPPLIER") {
-        props.history.push("/ingredients");
+        navigate("/ingredients");
       }
-    } else if (response && response.status === "error") {
-      alert(response.error);
-    } else if (error) {
-      alert(error);
-    }
-  }, [loading, error, response]);
 
+      window.location.reload();
+    } else if (error) {
+      alert(error); // Display error message if there's an error
+    }
+  }, [response, error, navigate]);
+  
   return (
     <div className="admin-signin-container">
       <div className="admin-signin">
@@ -71,6 +74,7 @@ const AdminSigninScreen = (props) => {
                 name="username"
                 type="text"
                 placeholder="test@test.com"
+                className="form-control"
               />
               <ErrorMessage name="username" component="div" className="error-message" />
             </div>
@@ -81,14 +85,18 @@ const AdminSigninScreen = (props) => {
                 name="password"
                 type="password"
                 placeholder="Xyz@123"
+                className="form-control"
               />
               <ErrorMessage name="password" component="div" className="error-message" />
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="signin-btn">Staff Signin</button>
+              <button type="submit" className="signin-btn" disabled={loading}>
+                {loading ? "Signing In..." : "Staff Signin"}
+              </button>
             </div>
-            {loading && <div className="loading">Loading...</div>}
+            {loading && <div className="loading-spinner text-center">Loading...</div>}
+            {error && <div className="error-message text-center">{error}</div>}
           </Form>
         </Formik>
       </div>

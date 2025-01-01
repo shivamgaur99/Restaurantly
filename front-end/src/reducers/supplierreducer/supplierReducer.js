@@ -22,9 +22,9 @@ export const supplierGetAllIngredientReducer = (state = {}, action) => {
     case GET_INGREDIENT_FAIL:
       return { loading: false, error: action.payload }
     case RESET_INGREDIENT_STATE:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -37,9 +37,9 @@ export const supplierUpdateIngredientReducer = (state = {}, action) => {
     case UPDATE_INGREDIENT_FAIL:
       return { loading: false, error1: action.payload }
     case RESET_UPDATE_INGREDIENT_STATE:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -52,8 +52,8 @@ export const supplierAddIngredientReducer = (state = {}, action) => {
     case ADD_INGREDIENT_FAIL:
       return { loading: false, error1: action.payload }
     case RESET_ADD_INGREDIENT_STATE:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }

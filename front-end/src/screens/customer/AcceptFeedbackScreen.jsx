@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { feedback } from '../../actions/customerActions';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 
-const AcceptFeedBackScreen = (props) => {
+const AcceptFeedBackScreen = () => {
   const dispatch = useDispatch();
   const feedbackHere = useSelector((store) => store.customerFeedback);
   const { loading, error, response } = feedbackHere;
+
+  const navigate = useNavigate(); // Use navigate hook
 
   // Formik configuration
   const formik = useFormik({
@@ -27,7 +30,7 @@ const AcceptFeedBackScreen = (props) => {
     onSubmit: (values) => {
       // Dispatch feedback action
       dispatch(feedback(values.message, values.rating));
-      props.history.push('/customermenu');
+      navigate('/customermenu'); // Redirect after submitting feedback
     },
   });
 
@@ -51,6 +54,7 @@ const AcceptFeedBackScreen = (props) => {
                 <div className="text-danger">{formik.errors.message}</div>
               ) : null}
             </div>
+
             <label htmlFor="customRange2" className="form-label">
               Rating: {formik.values.rating}
             </label>
@@ -69,10 +73,13 @@ const AcceptFeedBackScreen = (props) => {
             {formik.touched.rating && formik.errors.rating ? (
               <div className="text-danger">{formik.errors.rating}</div>
             ) : null}
-            <button type="submit" className="btn btn-info mt-3">
-              Submit Feedback
+
+            <button type="submit" className="btn btn-info mt-3" disabled={loading}>
+              {loading ? 'Submitting...' : 'Submit Feedback'}
             </button>
           </form>
+
+          {error && <div className="text-danger mt-3">{error}</div>} {/* Display errors if any */}
         </div>
       </div>
     </div>

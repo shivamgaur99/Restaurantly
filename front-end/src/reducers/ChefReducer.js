@@ -17,7 +17,7 @@ export const chefGetApprovedOrdersReducer = (state = {}, action) => {
       return { loading: false, error: action.payload }
 
     default:
-      return state
+       return state;
   }
 }
 
@@ -30,6 +30,6 @@ export const chefPrepareOrderReducer = (state = {}, action) => {
     case POST_PREPAREORDER_FAIL:
       return { loading1: false, error1: action.payload }
     default:
-      return state
+       return state;
   }
 }

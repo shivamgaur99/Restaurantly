@@ -4,24 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { store } from "react-notifications-component";
 import { useNavigate } from "react-router-dom";
 
-const MenuScreen = (props) => {
+const MenuScreen = () => {
   const [search, setSearch] = useState("");
 
   const menu = useSelector((store) => store.getallmenu);
 
   const { loading, response, error } = menu;
 
-  const navigate = useNavigate();;
+  const navigate = useNavigate(); // Initialize useNavigate
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getmenu());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {}, [error, response, loading]);
 
   const addMenu = () => {
-    props.navigate("/addmenu");
+    navigate("/addmenu"); // Use navigate instead of props.history.push
   };
 
   const deleteMenu = async (menuId) => {
@@ -29,25 +29,27 @@ const MenuScreen = (props) => {
       if (window.confirm(`Are you sure you want to delete this menu item?`)) {
         await dispatch(deleteMenuItem(menuId));
         alert("Menu item deleted successfully.");
-        window.location.reload();
-        // history.push("/menu"); // Redirect on successful delete
+        // You can choose to reload data here instead of refreshing the page
+        dispatch(getmenu());
       }
     } catch (error) {
       console.error("Error deleting menu item:", error);
-      alert("Failed to delete menu item. Please try later."); // Show error alert
-      navigate("/menu");
+      alert("Failed to delete menu item. Please try later.");
     }
   };
 
   const all = () => {
     setSearch("");
   };
+
   const veg = () => {
     setSearch("veg");
   };
+
   const nonveg = () => {
     setSearch("nonveg");
   };
+
   return (
     <div className="container p-5 text-white" style={{ marginTop: "100px" }}>
       <div className="row mt-3">
@@ -119,11 +121,7 @@ const MenuScreen = (props) => {
                           <button
                             className="btn btn-primary"
                             onClick={() => {
-                              // const menuToEdit = response.data.find(
-                              //   (menu) => menu.id === menu.id
-                              // ); // Change menu.id to the correct ID
-                              console.log(menu);
-                              props.history.push(`/editmenu`, { menu });
+                              navigate(`/editmenu`, { state: { menu } }); // Use navigate instead of history.push
                             }}
                           >
                             Edit
@@ -137,7 +135,6 @@ const MenuScreen = (props) => {
                           >
                             Delete
                           </button>
-                          {/* <button className="btn btn-danger" onClick={() => handleDelete(menu.id)}>Delete</button> */}
                         </td>
                       </tr>
                     );

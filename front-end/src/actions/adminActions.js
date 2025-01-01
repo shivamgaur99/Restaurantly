@@ -100,7 +100,7 @@ export const signup = (name, username, email, password, role) => {
 };
 
 export const signin = (username, password) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: ADMIN_SIGNIN_REQUEST,
     });
@@ -116,20 +116,43 @@ export const signin = (username, password) => {
       password,
     };
     const url = "http://localhost:8383/admin/login";
-    axios
-      .post(url, body, header)
-      .then((response) => {
-        dispatch({
-          type: ADMIN_SIGNIN_SUCCESS,
-          payload: response.data,
-        });
-      })
-      .catch((error) => {
+
+    try {
+      const response = await axios.post(url, body, header);
+      dispatch({
+        type: ADMIN_SIGNIN_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      if (error.response) {
+        // Handle specific error responses based on status codes
+        if (error.response.status === 401) {
+          dispatch({
+            type: ADMIN_SIGNIN_FAIL,
+            payload:
+              error.response.data.message || "Invalid username or password",
+          });
+        } else if (error.response.status === 500) {
+          dispatch({
+            type: ADMIN_SIGNIN_FAIL,
+            payload: error.response.data.message || "Server error occurred",
+          });
+        } else {
+          // Handle other HTTP errors
+          dispatch({
+            type: ADMIN_SIGNIN_FAIL,
+            payload:
+              error.response.data.message || "An error occurred during sign-in",
+          });
+        }
+      } else {
+        // Network or unexpected errors
         dispatch({
           type: ADMIN_SIGNIN_FAIL,
-          payload: error,
+          payload: error.message || "An unknown error occurred",
         });
-      });
+      }
+    }
   };
 };
 

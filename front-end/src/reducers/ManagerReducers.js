@@ -36,9 +36,9 @@ export const managerGetOrdersReducer = (state = {}, action) => {
     case MANAGER_GETORDERS_FAIL:
       return { loading: false, error: action.payload }
     case MANAGER_GETORDERS_RESET:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -51,9 +51,9 @@ export const getChefsReducer = (state = {}, action) => {
     case GET_CHEFS_FAIL:
       return { loading1: false, error1: action.payload }
     case GET_CHEFS_RESET:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -66,9 +66,9 @@ export const approveOrderReducer = (state = {}, action) => {
     case MANAGER_APPROVEORDER_FAIL:
       return { loading2: false, error2: action.payload }
     case MANAGER_APPROVEORDER_RESET:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -81,9 +81,9 @@ export const getWaitersReducer = (state = {}, action) => {
     case GET_WAITERS_FAIL:
       return { loading: false, error: action.payload }
     case GET_WAITERS_RESET:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -96,9 +96,9 @@ export const assignWaiterReducer = (state = {}, action) => {
     case ASSIGN_WAITER_FAIL:
       return { loading1: false, error1: action.payload }
     case ASSIGN_WAITER_RESET:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }
 
@@ -111,8 +111,8 @@ export const managergetalltablesReducer = (state = {}, action) => {
     case GET_TABLE_FAIL:
       return { loading2: false, error2: action.payload }
     case RESET_TABLE_STATE:
-      return (state = '')
+       return {};
     default:
-      return state
+       return state;
   }
 }

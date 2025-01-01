@@ -243,7 +243,7 @@ export const resetFeedback = () => {
 };
 
 export const signin = (username, password) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: CUSTOMER_SIGNIN_REQUEST,
     });
@@ -261,23 +261,42 @@ export const signin = (username, password) => {
 
     const url = "http://localhost:8383/customer/login";
 
-    axios
-      .post(url, body, header)
-      .then((response) => {
-        dispatch(
-          {
-            type: CUSTOMER_SIGNIN_SUCCESS,
-            payload: response.data,
-          },
-         
-        );
-      })
-      .catch((error) => {
+    try {
+      const response = await axios.post(url, body, header);
+      dispatch({
+        type: CUSTOMER_SIGNIN_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      if (error.response) {
+        // Handle specific error responses based on status codes
+        if (error.response.status === 401) {
+          dispatch({
+            type: CUSTOMER_SIGNIN_FAIL,
+            payload:
+              error.response.data.message || "Invalid username or password",
+          });
+        } else if (error.response.status === 500) {
+          dispatch({
+            type: CUSTOMER_SIGNIN_FAIL,
+            payload: error.response.data.message || "Server error occurred",
+          });
+        } else {
+          // Handle other HTTP errors
+          dispatch({
+            type: CUSTOMER_SIGNIN_FAIL,
+            payload:
+              error.response.data.message || "An error occurred during sign-in",
+          });
+        }
+      } else {
+        // Network or unexpected errors
         dispatch({
           type: CUSTOMER_SIGNIN_FAIL,
-          payload: error,
+          payload: error.message || "An unknown error occurred",
         });
-      });
+      }
+    }
   };
 };
 

@@ -1,77 +1,69 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getingredinet,
-  addMenuItem,
-  resetAddMenu,
-} from "../../actions/adminActions";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { getingredinet, addMenuItem, resetAddMenu } from "../../actions/adminActions";
 
-const AddMenuScreen = (props) => {
+const AddMenuScreen = () => {
   const [menuName, setMenuName] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState(""); // State to store the selected value
-
-  // console.log(category);
-  const handleDropdownChange = (event) => {
-    setCategory(event.target.textContent); // Update the selected value when an item is clicked
-  };
-
-  let ingredient = new Array();
-  const addMenu = () => {
-    console.log(ingredient);
-    dispatch(addMenuItem(menuName, category, price, ingredient));
-  };
-
-  const ingredients = useSelector((store) => store.getAllIngredients);
-
-  const { loading, response, error } = ingredients;
+  const [category, setCategory] = useState(""); // State to store the selected category
+  const [selectedIngredients, setSelectedIngredients] = useState([]); // Use array to store selected ingredients
 
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Declare navigate hook
 
-  useEffect(() => {
-    dispatch(getingredinet());
-  }, []);
-
-  useEffect(() => {}, [error, response, loading]);
-
-  let index = ingredient.length;
-  const addingredient = (id) => {
-    ingredient[index] = id;
-    index++;
-  };
+  const ingredients = useSelector((store) => store.getAllIngredients);
+  const { loading, response, error } = ingredients;
 
   const addmenu = useSelector((store) => store.addmenu);
   const { loading1, response1, error1 } = addmenu;
 
   useEffect(() => {
-    console.log("use effect called: ");
-    console.log("loading: ", loading1);
-    console.log("response: ", response1);
-    console.log("error: ", error1);
+    dispatch(getingredinet());
+  }, [dispatch]);
 
+  useEffect(() => {
     if (response1) {
-      // user successfully got registered
-
       dispatch(resetAddMenu());
-      props.history.push("/menu");
-    } else if (error) {
-      // there is an error while making the API call
-      console.log(error);
-      alert("error while making API call");
+      navigate("/menu"); // Navigate to /menu on success
+    } else if (error1) {
+      console.error(error1);
+      alert("Error while making API call");
     }
-  }, [loading1, response1, error1]);
+  }, [response1, error1, navigate, dispatch]);
+
+  const handleDropdownChange = (event) => {
+    setCategory(event.target.textContent); // Update the selected category
+  };
+
+  const handleIngredientChange = (id) => {
+    setSelectedIngredients((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((ingredientId) => ingredientId !== id); // Remove ingredient if already selected
+      } else {
+        return [...prev, id]; // Add ingredient to the list
+      }
+    });
+  };
+
+  const addMenu = () => {
+    if (!menuName || !category || !price || selectedIngredients.length === 0) {
+      alert("Please fill in all fields and select ingredients.");
+      return;
+    }
+    dispatch(addMenuItem(menuName, category, price, selectedIngredients)); // Dispatch action to add menu item
+  };
 
   return (
     <div className="container p-4 text-white" style={{ marginTop: "100px" }}>
-      <h2>AddMenu</h2>
+      <h2>Add Menu</h2>
       <div className="form">
         <div className="mb-3">
           <label className="form-label">Menu Name</label>
           <input
-            onChange={(e) => {
-              setMenuName(e.target.value);
-            }}
+            onChange={(e) => setMenuName(e.target.value)}
             className="form-control"
+            value={menuName}
           />
         </div>
         <div className="mb-3">
@@ -85,10 +77,7 @@ const AddMenuScreen = (props) => {
             >
               {category || 'Category'}
             </button>
-            <ul
-              className="dropdown-menu dropdown-menu-dark"
-              aria-labelledby="dropdownMenuButton2"
-            >
+            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
               <li className="dropdown-item" onClick={handleDropdownChange}>
                 VEG
               </li>
@@ -101,12 +90,10 @@ const AddMenuScreen = (props) => {
         <div className="mb-3">
           <label className="form-label">Price</label>
           <input
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
+            onChange={(e) => setPrice(e.target.value)}
             type="number"
             className="form-control"
-            placeholder=""
+            value={price}
           />
         </div>
         <table className="table table-striped text-white">
@@ -122,14 +109,12 @@ const AddMenuScreen = (props) => {
               response.data &&
               response.data.length > 0 &&
               response.data.map((ing) => (
-                <tr key={ing.id} className="text-white">
+                <tr key={ing.id}>
                   <td>{ing.id}</td>
                   <td>{ing.name}</td>
                   <td>
                     <input
-                      onChange={(e) => {
-                        addingredient(ing.id);
-                      }}
+                      onChange={() => handleIngredientChange(ing.id)}
                       type="checkbox"
                       value={ing.id}
                       style={{ cursor: "pointer" }}
@@ -139,8 +124,8 @@ const AddMenuScreen = (props) => {
               ))}
           </tbody>
         </table>
-        <button onClick={addMenu} className="btn btn-success">
-          Add Menu
+        <button onClick={addMenu} className="btn btn-success" disabled={loading1}>
+          {loading1 ? "Adding Menu..." : "Add Menu"}
         </button>
       </div>
     </div>

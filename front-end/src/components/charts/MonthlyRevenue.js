@@ -2,6 +2,10 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Doughnut } from 'react-chartjs-2'
 import { getAllMonthRevenue } from '../../actions/RevenueActions'
+import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js'
+
+// Register Chart.js components
+ChartJS.register(ArcElement, CategoryScale, LinearScale, Tooltip, Legend)
 
 const MonthlyRevenue = () => {
   const dispatch = useDispatch()
@@ -13,7 +17,7 @@ const MonthlyRevenue = () => {
     dispatch(getAllMonthRevenue())
     console.log('response is ')
     console.log(response)
-  }, [])
+  }, [dispatch])
 
   return (
     <div>
